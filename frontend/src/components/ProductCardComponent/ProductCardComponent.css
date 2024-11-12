@@ -1,0 +1,12 @@
+#ProductCard p.product_card_duration {
+    font-size: 10px;
+}
+
+#ProductCard h6.product_card_productName , #ProductCard p.product_card_productPrice {
+    font-size:14px ;
+}
+
+#ProductCard button.btn {
+    font-size: 13px;
+    font-weight: 500;
+}

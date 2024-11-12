@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+#color-Y {
+    color: #F8CB46;
+}
+
+#color-G {
+    color: #54B226;
+}
+
+.navbar .Logo {
+  font-family: "Mulish", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 38px;
+}
+
+#btn-My-Cart {
+  background-color: #0c831f;
+  padding-top: 0.8rem ;
+  padding-bottom: 0.8rem ;
+}
+
+header#header {
+  background-color: white;
+}
+
+div.search-container {
+  background-color: #f8f8f8;
+}
+
+div.search-container input {
+  border-style: none !important;
+  border: 0px !important;
+}
+
+/* Placeholder slider */
+
+div.slider-container {
+  width: max-content !important;
+}
+
+@media screen and (width < 1025px) {
+  span#My-cart {
+    display: none;
+  }  
+};
