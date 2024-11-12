@@ -27,9 +27,8 @@ import Slider from "react-slick";
 import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { BannerComponent } from "../../components/BannerComponent/BannerComponent";
-import png1 from "../../assets/Png/banner-png.png";
 import ProductCardComponent from "../../components/ProductCardComponent/ProductCardComponent";
-import Product from '../../assets/Product-sample/Product-1.jpg'
+import { useDataContext } from "../../context/context";
 
 const ProductsDisplay = [
   p1,
@@ -54,82 +53,10 @@ const ProductsDisplay = [
   p20,
 ];
 
-const BannerData = [
-  {
-    img: png1,
-    head: "Pet Care Supplies in Minutes",
-    description: "Food, treats, toys & more",
-    button: "Order Now",
-    backgroundColor: "#EAFFD0",
-    buttonColor: "white",
-    buttonTextColor: "black",
-  },
-  {
-    img: png1,
-    head: "Pet Care Supplies in Minutes",
-    description: "Food, treats, toys & more",
-    button: "Order Now",
-    backgroundColor: "#71C9CE",
-    buttonColor: "black",
-    buttonTextColor: "white",
-  },
-  {
-    img: png1,
-    head: "Pet Care Supplies in Minutes",
-    description: "Food, treats, toys & more",
-    button: "Order Now",
-    backgroundColor: "#CBF1F5",
-    buttonColor: "white",
-    buttonTextColor: "black",
-  },
-];
-
-const productData = [
-  {
-    img: Product,
-    name: "Amul Taaza",
-    duration: 8,
-    weight: "100 g",
-    price: 50,
-  },
-  {
-    img: Product,
-    name: "Amul Taaza",
-    duration: 8,
-    weight: "100 g",
-    price: 50,
-  },
-  {
-    img: Product,
-    name: "Amul Taaza",
-    duration: 8,
-    weight: "100 g",
-    price: 50,
-  },
-  {
-    img: Product,
-    name: "Amul Taaza",
-    duration: 8,
-    weight: "100 g",
-    price: 50,
-  },
-  {
-    img: Product,
-    name: "Amul Taaza",
-    duration: 8,
-    weight: "100 g",
-    price: 50,
-  },
-  {
-    img: Product,
-    name: "Amul Taaza",
-    duration: 8,
-    weight: "100 g",
-    price: 50,
-  },
-];
-
 export const HomePage = () => {
+
+  const {BannerData, ProductData} = useDataContext(); 
+
   return (
     <main id="Home_Page">
       {/* banner section */}
@@ -168,7 +95,7 @@ export const HomePage = () => {
         </div>
 
         <div id="Products" className="row m-0 py-2">
-          {productData.map((P,index) => (
+          {ProductData.map((P,index) => (
             <div className="col-6 col-md-4 col-lg-2 m-0 px-2 py-2" key={index}>
               <ProductCardComponent Data={P}/>
             </div>
