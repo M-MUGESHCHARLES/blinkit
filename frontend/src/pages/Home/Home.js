@@ -1,4 +1,4 @@
-import "./homepage.css";
+import "./Home.css";
 import banner_lg from "../../assets/banner-lg.jpg";
 import p1 from "../../assets/Products-image-large-screen/p1.jpeg";
 import p3 from "../../assets/Products-image-large-screen/p2.png";
