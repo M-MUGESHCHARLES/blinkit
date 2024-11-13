@@ -30,9 +30,13 @@ div.search-container {
   background-color: #f8f8f8;
 }
 
-div.search-container input {
+div.search-container input.search_input {
   border-style: none !important;
   border: 0px !important;
+  border: 0;
+  outline: 0;
+  width: 100%;
+  background-color: transparent;
 }
 
 /* Placeholder slider */
@@ -45,4 +49,23 @@ div.slider-container {
   span#My-cart {
     display: none;
   }  
-};
+}
+
+@media screen and (width < 600px) {
+  #Delivery_location {
+    font-size: 0.7rem ;
+  }  
+  #Delivery_text {
+    font-size: 0.9rem ;
+  }
+}
+
+@media screen and (width < 1024px) {
+  #SearchBar_div {
+    width: 80%;
+    display: inline-block;
+  }  
+  #Cart_Button_sm_screen {
+    width: 20%;
+  }
+}
