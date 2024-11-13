@@ -50,7 +50,7 @@ const ProductsDisplay = [
   p20,
 ];
 
-export const Home = () => {
+export const HomePage = () => {
 
   const {BannerData, ProductData} = useDataContext(); 
 

@@ -4,9 +4,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { NavBar } from './components/NavBar/NavBar'
-import { Home } from './pages/Home/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
+import { HomePage } from './pages/Homepage/HomePage';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <NavBar/>
       <Routes>
-        <Route path='/' element={<Home/>} />
+        <Route path='/' element={<HomePage/>} />
         <Route path=':product' element={<ProductDetailsPage/>} />
       </Routes>
     </BrowserRouter>
