@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { NavBar } from './components/NavBar/NavBar'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
-import { HomePage } from './pages/Homepage/HomePage';
+import {HomePage} from './pages/HomePage/HomePage';
 
 function App() {
   return (
