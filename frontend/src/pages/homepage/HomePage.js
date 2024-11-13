@@ -1,8 +1,5 @@
 import "./homepage.css";
 import banner_lg from "../../assets/banner-lg.jpg";
-import banner_sm1 from "../../assets/banner-sm-1.jpg";
-import banner_sm2 from "../../assets/banner-sm-2.jpg";
-import banner_sm3 from "../../assets/banner-sm-3.jpg";
 import p1 from "../../assets/Products-image-large-screen/p1.jpeg";
 import p3 from "../../assets/Products-image-large-screen/p2.png";
 import p4 from "../../assets/Products-image-large-screen/p3.png";
@@ -79,7 +76,7 @@ export const HomePage = () => {
       <section className="">
         <div className="row m-0 p-0">
           {ProductsDisplay.map((P, index) => (
-            <div key={index} className="col-3 col-md-2 p-0">
+            <div key={index} className="col-3 col-md-1 p-0">
               <img src={P} width="100%" height="auto" alt="products-display" />
             </div>
           ))}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useDataContext } from '../../context/context';
 import { AddCartButton } from '../../components/AddCartButton/AddCartButton';
@@ -6,8 +6,6 @@ import { AddCartButton } from '../../components/AddCartButton/AddCartButton';
 export default function ProductDetailsPage() {
     const {product} = useParams();
     const {ProductData} = useDataContext();
-
-        const [quantity, setQuantity] = useState(0);
 
     const Details = ProductData.find(
         (P) => P.name === product
@@ -64,4 +62,4 @@ export default function ProductDetailsPage() {
       </div>
     </>
   );
-}
+};
