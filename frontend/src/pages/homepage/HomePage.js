@@ -68,20 +68,27 @@ export const HomePage = () => {
             </div>
           ))}
         </div>
-
       </section>
 
       {/* product section */}
 
       <section className="">
-        <div className="row m-0 p-0">
+        <div className="parent_div_productDisplay m-0 p-0">
           {ProductsDisplay.map((P, index) => (
-            <div key={index} className="col-3 col-md-1 p-0">
-              <img src={P} width="100%" height="auto" alt="products-display" />
+            <div
+              key={index}
+              className="child_div_productDisplay col-lg-1 p-0"
+            >
+              <img
+                src={P}
+                className="img-fluid"
+                width="100%"
+                height="auto"
+                alt="products-display"
+              />
             </div>
           ))}
-        </div> 
-        
+        </div>
       </section>
       <section className="px-3 py-3">
         <div className="d-flex justify-content-between pb-1">
@@ -92,11 +99,11 @@ export const HomePage = () => {
         </div>
 
         <div id="Products" className="row m-0 py-2">
-          {ProductData.map((P,index) => (
+          {ProductData.map((P, index) => (
             <div className="col-6 col-md-4 col-lg-2 m-0 px-2 py-2" key={index}>
-              <ProductCardComponent Data={P}/>
+              <ProductCardComponent Data={P} />
             </div>
-          )) }          
+          ))}
         </div>
       </section>
     </main>

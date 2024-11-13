@@ -52,3 +52,29 @@ span.fraction-dot {
 div.slick-slide.slick-active div div {
     outline: none;
 }
+
+/* ------------------------ Product Display --- */
+
+.parent_div_productDisplay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0; /* Adjust this if you want spacing between columns */
+}
+
+.child_div_productDisplay {
+  flex: 0 0 25%; /* Default: 4 columns on small screens (100% / 4) */
+}
+
+/* Medium screens: 6 columns */
+@media (min-width: 768px) {
+  .child_div_productDisplay {
+    flex: 0 0 16.6667%; /* 100% / 6 */
+  }
+}
+
+/* Large screens: 10 columns */
+@media (min-width: 1020px) {
+  .child_div_productDisplay {
+    flex: 0 0 10%; /* 100% / 10 */
+  }
+}

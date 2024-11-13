@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { NavBar } from './components/NavBar/NavBar'
-import { HomePage } from './pages/Homepage/HomePage';
+import { HomePage } from './pages/HomePage/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
 
