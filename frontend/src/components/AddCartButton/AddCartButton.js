@@ -1,34 +1,47 @@
-import React, { useState } from 'react'
+import { Button } from '@mui/material';
+import React, { useEffect, useState } from 'react'
 
-export const AddCartButton = () => {
+export const AddCartButton = (ProductName) => {
    const [count, setCount] = useState(0);
 
+   useEffect( () => {
+      console.log('Product Name : ', ProductName);
+   }, []);
+
+   const handleClick = () => {
+    console.log(`Add to Cart Button clicked : ${ProductName}` );
+   };
+
    return (
-     <div className="ms-auto">
+     <Button
+       variant={count > 0 ? "contained" : "outlined"}
+       color="success"
+       className="m-0 p-0 ms-auto"
+       onClick={handleClick}
+     >
        {count === 0 ? (
-         <button
-           className="btn btn-outline-success h-100 "
-           onClick={() => setCount(1)}
-         >
+         <span className="py-2 w-100" onClick={() => setCount(1)}>
            ADD
-         </button>
+         </span>
        ) : (
-         <div className="btn btn-success h-100 d-flex align-items-center" style={{width:'fit-content'}} >
-           <button
-             className="btn btn-success p-0 m-0"
+         <div className="d-flex align-items-center w-100">
+           <span
+             style={{ cursor: "pointer", minWidth: "fit-content" }}
+             className="p-0 m-0 py-2 px-2 h-100 w-auto"
              onClick={() => setCount(count - 1)}
            >
              -
-           </button>
-           <span className="mx-2">{count}</span>
-           <button
-             className="btn btn-success p-0 m-0"
+           </span>
+           <span className="mx-auto">{count}</span>
+           <span
+             style={{ cursor: "pointer", minWidth: "fit-content" }}
+             className=" p-0 m-0 py-2 px-2 h-10 w-auto"
              onClick={() => setCount(count + 1)}
            >
              +
-           </button>
+           </span>
          </div>
        )}
-     </div>
+     </Button>
    );
  };

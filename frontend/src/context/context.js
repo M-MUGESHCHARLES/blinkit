@@ -132,7 +132,7 @@ export const DataProvider = ({children}) => {
       },
       {
         img: Product,
-        name: "Amul Taaza",
+        name: "Amul Panner butter masala",
         duration: 8,
         weight: "1L",
         price: 71,

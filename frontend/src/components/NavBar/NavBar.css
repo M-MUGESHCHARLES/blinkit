@@ -45,19 +45,20 @@ div.slider-container {
   width: max-content !important;
 }
 
-@media screen and (width < 1025px) {
+@media screen and (width < 500px ),
+       screen and (min-width: 990px) and (max-width: 1260px) {
   span#My-cart {
     display: none;
   }  
 }
 
-@media screen and (width < 600px) {
-  #Delivery_location {
-    font-size: 0.7rem ;
-  }  
-  #Delivery_text {
+@media screen and (width < 780px) {
+  div #Delivery_text {
     font-size: 0.9rem ;
   }
+  div #Delivery_location {
+    font-size: 0.7rem ;
+  }  
 }
 
 @media screen and (width < 1024px) {
@@ -69,3 +70,4 @@ div.slider-container {
     width: 20%;
   }
 }
+

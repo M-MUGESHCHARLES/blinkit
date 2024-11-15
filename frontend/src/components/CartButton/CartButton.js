@@ -1,4 +1,4 @@
-import React from 'react'
+import "./CartButton.css"
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import CartPage from '../../pages/CartPage/CartPage';
 
@@ -6,7 +6,7 @@ export const CartButton = () => {
   return (
     <>
       <button
-        className="btn rounded text-white fw-semibold py-2"
+        className="btn rounded text-white fw-semibold py-2 justify-content-center"
         id="btn-My-Cart"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasWithBothOptions"
@@ -14,27 +14,27 @@ export const CartButton = () => {
         <span>
           <MdOutlineShoppingCart size={24} />
         </span>
-        <span id="My-cart">My Cart</span>
+        <span className="ps-1" id="My-cart">Cart</span>
       </button>
 
       <div
-        class="offcanvas offcanvas-end"
+        className="offcanvas offcanvas-end"
         data-bs-scroll="true"
         tabindex="-1"
         id="offcanvasWithBothOptions"
       >
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
-            MyCart
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+            My Cart
           </h5>
           <button
             type="button"
-            class="btn-close"
+            className="btn-close"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
           ></button>
         </div>
-        <div class="offcanvas-body">
+        <div className="offcanvas-body">
           <CartPage/>
         </div>
       </div>

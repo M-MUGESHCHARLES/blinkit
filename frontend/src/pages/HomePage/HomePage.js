@@ -63,8 +63,8 @@ export const HomePage = () => {
 
         <div className="row m-0 p-3">
           {BannerData.map((Banner, index) => (
-            <div className="col-12 col-md-4 py-1 py-md-0">
-              <BannerComponent Data={Banner} key={index} />
+            <div className="col-12 col-md-4 py-1 py-md-0" key={index}>
+              <BannerComponent Data={Banner}  />
             </div>
           ))}
         </div>

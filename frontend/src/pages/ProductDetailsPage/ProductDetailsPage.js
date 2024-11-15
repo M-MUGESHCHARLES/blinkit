@@ -16,14 +16,69 @@ export default function ProductDetailsPage() {
       <div className="container my-5">
         <div className="row">
           {/* Product Image Section */}
-          <div className="col-md-6 align-content-around text-center">
-            <img src={Details.img} alt="product" className="img-fluid mb-3" />
+          <div className="col-md-5 d-flex flex-column m-0 align-content-around text-center">
+            <img
+              src={Details.img}
+              alt="product"
+              className="img-fluid mb-3 col-12"
+            />
+
+            <div className="d-flex px-2">
+              <div className="p-2">
+                <img
+                  src={Details.img}
+                  alt="product"
+                  height="auto"
+                  width="25%"
+                  className="img-fluid mb-3 col-12"
+                />
+              </div>
+              <div className="p-2">
+                <img
+                  src={Details.img}
+                  alt="product"
+                  height="auto"
+                  width="25%"
+                  className="img-fluid mb-3 col-12"
+                />
+              </div>
+              <div className="p-2">
+                <img
+                  src={Details.img}
+                  alt="product"
+                  height="auto"
+                  width="25%"
+                  className="img-fluid mb-3 col-12"
+                />
+              </div>
+              <div className="p-2">
+                <img
+                  src={Details.img}
+                  alt="product"
+                  height="auto"
+                  width="25%"
+                  className="img-fluid mb-3 col-12"
+                />
+              </div>
+              <div className="p-2">
+                <img
+                  src={Details.img}
+                  alt="product"
+                  height="auto"
+                  width="25%"
+                  className="img-fluid mb-3 col-12"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Product Information Section */}
-          <div className="col-md-6 px-4 px-lg-2">
-            <nav className="text-muted mb-2">
-              Home / {Details.category} / {Details.name}
+          <div className="col-md-7 px-4 pt-xl-4 py-3 py-lg-0 px-lg-2">
+            <nav className="text-muted fw-semibold mb-2">
+              Home / {Details.category} /
+              <span className="fw-bold" id="color-G">
+                {Details.name}
+              </span>
             </nav>
             <h1 className="h4 mb-2">{Details.name}</h1>
             <p className="text-muted small">⏱️ {Details.duration} MINS</p>
@@ -42,7 +97,7 @@ export default function ProductDetailsPage() {
             <p className="text-muted small">{Details.description}</p>
 
             {/* Quantity Control */}
-            <AddCartButton />
+            <AddCartButton ProductName={Details.name} />
 
             {/* Why Shop Section */}
             <h3 className="h6 mt-4">Why shop from us?</h3>

@@ -1,0 +1,5 @@
+@media screen and (width < 450px) {
+    div.offcanvas.show {
+        width: 100% !important;
+    }
+}

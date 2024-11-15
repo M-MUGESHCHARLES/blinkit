@@ -50,7 +50,7 @@ export const NavBar = () => {
   return (
     <header id="header" className="border-bottom">
       <nav className="navbar row m-0 p-0 py-4">
-        <div className="col-12 col-lg-4 d-flex ">
+        <div className="col-12 col-lg-5 col-xl-4 d-flex ">
           <div className="px-2">
             <h2 className=" Logo m-0 d-inline ps-3 m-0">
               <span id="color-Y">blink</span>
@@ -58,7 +58,7 @@ export const NavBar = () => {
             </h2>
           </div>
 
-          <div className="ps-4 d-flex flex-column px-2">
+          <div className="ps-4 d-flex flex-column px-2 justify-content-center">
             <h6 className="fw-bold m-0 " id="Delivery_text">
               Delivery in 8 minutes
             </h6>
@@ -74,7 +74,7 @@ export const NavBar = () => {
           </div>
         </div>
 
-        <div className="col-12 col-lg-6 px-3 pt-3 pt-lg-0" id="SearchBar_div">
+        <div className="col-12 col-lg-5 col-xl-6 pt-3 pt-lg-0 px-3" id="SearchBar_div">
           <div
             className="d-flex search-container border border-1 rounded-3 px-2 overflow-hidden"
             onClick={handleClick}
@@ -114,11 +114,8 @@ export const NavBar = () => {
           <div className="d-none d-lg-block align-content-around">
             <button className="btn btn-light border-0">Login</button>
           </div>
-          <div className="ps-3">
-            
-
-            <CartButton/>
-
+          <div className="ps-lg-3 mx-auto">
+            <CartButton />
           </div>
         </div>
       </nav>
