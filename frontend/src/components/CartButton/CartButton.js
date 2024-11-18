@@ -20,7 +20,7 @@ export const CartButton = () => {
       <div
         className="offcanvas offcanvas-end"
         data-bs-scroll="true"
-        tabindex="-1"
+        tabIndex="-1"
         id="offcanvasWithBothOptions"
       >
         <div className="offcanvas-header">

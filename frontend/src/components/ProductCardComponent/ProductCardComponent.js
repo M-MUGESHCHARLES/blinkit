@@ -13,8 +13,8 @@ import { Link } from 'react-router-dom'
                   <img src={Data.img} className='img-fluid rounded-5' alt='product' height='auto' width='100%' />
               </div>
             </Link>
-                <div className='col-12 d-flex flex-column m-0 p-0 ps-3'>
-                    <p className='m-0 fw-bold product_card_duration'> <IoMdStopwatch /> {Data.duration} mins </p>
+                <div className='col-12 d-flex flex-column m-0 p-0 ps-3 border-top pt-2'>
+                    <p className='m-0 fw-bold product_card_duration'><span className='badge text-primary bg-primary-subtle'> <IoMdStopwatch /> {Data.duration} mins </span></p>
                     <h6 className='m-0 col-10 text-truncate fw-bold product_card_productName py-2'> {Data.name}</h6>
                     <p className='m-0 text-secondary pt-1 '>{Data.weight}</p>
                 </div>

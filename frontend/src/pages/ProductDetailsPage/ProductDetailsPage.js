@@ -2,10 +2,11 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useDataContext } from '../../context/context';
 import { AddCartButton } from '../../components/AddCartButton/AddCartButton';
+import { ProductData } from '../../assets/Data/Data';
 
 export default function ProductDetailsPage() {
     const {product} = useParams();
-    const {ProductData} = useDataContext();
+    const {} = useDataContext();
 
     const Details = ProductData.find(
         (P) => P.name === product
