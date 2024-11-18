@@ -39,14 +39,10 @@ useEffect(() => {
     });
   }, []);
 
-  // Auth
-  const isAuth = true;
-
   const contextValue = {
     setCart,
     cart,
     handleAddToCart,
-    isAuth,
   };
 
   return (

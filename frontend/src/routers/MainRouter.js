@@ -1,6 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { NavBar } from '../components/NavBar/NavBar';
+import { Route, Routes } from 'react-router-dom';
 import Footer from '../components/Footer/Footer';
 import { HomePage } from '../pages/HomePage/HomePage';
 import ProductDetailsPage from '../pages/ProductDetailsPage/ProductDetailsPage';
@@ -11,29 +10,32 @@ import { PublicRoute } from './PublicRoute';
 export const MainRouter = () => {
   return (
     <>
-      <BrowserRouter>
-        <NavBar />
         <Routes>
 
-          <Route path="/" element={
-            // <PrivateRoute>
-                <HomePage />
-            // </PrivateRoute>
-            } />
-
-          <Route path=":product" element={
-            <ProductDetailsPage />
-            } />
-
+        {/* public routes */}
             <Route path='/login' element={
-                // <PublicRoute>
+                <PublicRoute>
                     <LoginPage/>
-                // </PublicRoute>
+                </PublicRoute>
             } />
+
+        {/* private routes */}
+
+            <Route path="/" element={
+                <PrivateRoute>
+                    <HomePage />
+                </PrivateRoute>
+            } />
+
+            <Route path=":product" element={
+                <PrivateRoute>
+                    <ProductDetailsPage />
+                </PrivateRoute>
+            } />
+
 
         </Routes>
         <Footer />
-      </BrowserRouter>
     </>
   );
 }

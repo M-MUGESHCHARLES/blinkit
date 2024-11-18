@@ -6,12 +6,15 @@ import { IoSearch } from "react-icons/io5";
 import Slider from "react-slick";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { CartButton } from "../CartButton/CartButton";
+import { useAuthContext } from "../../context/AuthContext";
 
 export const NavBar = () => {
   const [IP, setIP] = useState("");
   const [locationData, setLocationData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [searchText, setSearchText] = useState('');
+  
+  const {isAuth,handleLogOut} = useAuthContext();
 
   const handleClick = () => setIsEditing(true);
   const handleMouseLeave = () => {
@@ -112,7 +115,9 @@ export const NavBar = () => {
           id="Cart_Button_sm_screen"
         >
           <div className="d-none d-lg-block align-content-around">
-            <button className="btn btn-light border-0">Login</button>
+            <button className="btn btn-light border-0"
+             onClick={handleLogOut} 
+            >{isAuth ? "LogOut" : "LogIn"}</button>
           </div>
           <div className="ps-lg-3 mx-auto">
             <CartButton />

@@ -18,11 +18,11 @@ import { Link } from 'react-router-dom'
                     <h6 className='m-0 col-10 text-truncate fw-bold product_card_productName py-2'> {Data.name}</h6>
                     <p className='m-0 text-secondary pt-1 '>{Data.weight}</p>
                 </div>
-                <div className='col-12 d-flex m-0 p-0 pb-md-2 ps-3'>
+                <div className='col-12 d-flex m-0 p-0 pb-2 ps-3'>
                     <div className='product_card_price align-content-around '>
                         <p className='text-black m-0 product_card_productPrice fw-semibold' >₹{Data.price} </p>
                     </div>
-                    <div className='ms-auto pe-md-2'>
+                    <div className='ms-auto pe-2'>
                         <AddCartButton ProductName={Data.name}/>
                     </div>
                 </div>

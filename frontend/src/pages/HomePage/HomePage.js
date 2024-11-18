@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { BannerComponent } from "../../components/BannerComponent/BannerComponent";
+import {NavBar } from '../../components/NavBar/NavBar'
 import ProductCardComponent from "../../components/ProductCardComponent/ProductCardComponent";
 import { useDataContext } from "../../context/context";
 import { BannerData, ProductsDisplay, ProductData } from "../../assets/Data/Data";
@@ -13,58 +14,61 @@ export const HomePage = () => {
   const {} = useDataContext(); 
 
   return (
-    <main id="Home_Page">
-      {/* banner section */}
-      <section id="Banner" className="">
-        {/* large banner */}
-        <BannerSlider />
-
-        <div className="row m-0 p-3">
-          {BannerData.map((Banner, index) => (
-            <div className="col-12 col-md-4 py-1 py-md-0" key={index}>
-              <BannerComponent Data={Banner}  />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* product section */}
-
-      <section className="">
-        <div className="parent_div_productDisplay m-0 p-0">
-          {ProductsDisplay.map((P, index) => (
-            <div
-              key={index}
-              className="child_div_productDisplay col-lg-1 p-0"
-            >
-              <img
-                src={P}
-                className="img-fluid"
-                width="100%"
-                height="auto"
-                alt="products-display"
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="px-3 py-3">
-        <div className="d-flex justify-content-between pb-1">
-          <h5 className="fw-semibold d-inline-block m-0">
-            Dairy, Bread & Eggs
-          </h5>
-          <h6 className="text-success my-auto m-0">see all</h6>
-        </div>
-
-        <div id="Products" className="row m-0 py-2">
-          {ProductData.map((P, index) => (
-            <div className="col-6 col-md-4 col-lg-2 m-0 px-2 py-2" key={index}>
-              <ProductCardComponent Data={P} />
-            </div>
-          ))}
-        </div>
-      </section>
-    </main>
+    <>
+      <NavBar />
+      <main id="Home_Page">
+        {/* banner section */}
+        <section id="Banner" className="">
+          {/* large banner */}
+          <BannerSlider />
+  
+          <div className="row m-0 p-3">
+            {BannerData.map((Banner, index) => (
+              <div className="col-12 col-md-4 py-1 py-md-0" key={index}>
+                <BannerComponent Data={Banner}  />
+              </div>
+            ))}
+          </div>
+        </section>
+  
+        {/* product section */}
+  
+        <section className="px-2">
+          <div className="parent_div_productDisplay m-0 p-0">
+            {ProductsDisplay.map((P, index) => (
+              <div
+                key={index}
+                className="child_div_productDisplay col-lg-1 p-0"
+              >
+                <img
+                  src={P}
+                  className="img-fluid"
+                  width="100%"
+                  height="auto"
+                  alt="products-display"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="px-0 px-md-2 px-lg-3 py-3">
+          <div className="d-flex justify-content-between px-3 pb-1">
+            <h5 className="fw-semibold d-inline-block m-0">
+              Dairy, Bread & Eggs
+            </h5>
+            <h6 className="text-success my-auto m-0">see all</h6>
+          </div>
+  
+          <div id="Products" className="row m-0 py-2">
+            {ProductData.map((P, index) => (
+              <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
+                <ProductCardComponent Data={P} />
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+    </>
   );
 };
 

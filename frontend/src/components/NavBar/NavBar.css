@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
 
-#color-Y {
-    color: #F8CB46;
-}
-
-#color-G {
-    color: #54B226;
-}
-
 .navbar .Logo {
   font-family: "Mulish", sans-serif;
   font-optical-sizing: auto;
