@@ -4,12 +4,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { IoSearch } from "react-icons/io5";
 import Slider from "react-slick";
-import { MdOutlineShoppingCart } from "react-icons/md";
 import { CartButton } from "../CartButton/CartButton";
 import { useAuthContext } from "../../context/AuthContext";
+import { GetUserLocation } from "../../apis";
 
 export const NavBar = () => {
-  const [IP, setIP] = useState("");
   const [locationData, setLocationData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -32,23 +31,30 @@ export const NavBar = () => {
     `Search "milk"`,
   ];
 
-  // Fetching IP Address  ---
-  useEffect(() => {
-    axios
-      .get("https://api.ipify.org?format=json")
-      .then((response) => setIP(response.data.ip))
-      .catch((error) => console.error("Unable to fetch IP address", error));
-  }, []);
+  // Fetching Network Location  --- 
+  //// method 1  (api is used directly inside the component  with the help of axios and useEffect ) 
+  // useEffect(() => {
+  //     axios
+  //       .get(`http://ip-api.com/json/`)
+  //       .then((res) => setLocationData(res.data))
+  //       .catch((err) => console.log("Error in fetching location ", err));
+  // }, []);
 
-  // Fetching Network Location  ---
+  //// method 2 (api is used inside the api folder , so we need to import the function  from that folder and store the response and call the function using useEffect inside the component  )
+  const UserLocation = async () => {
+      try {
+        const response = await GetUserLocation();
+        if(response?.status === 200){
+          console.log('User location data fetched successfully');
+          setLocationData(response.data);
+        }
+      }catch(err) {
+        console.log('Eror fetching user location : ',err);
+      }
+  };
   useEffect(() => {
-    if (IP) {
-      axios
-        .get(`http://ip-api.com/json/${IP}`)
-        .then((res) => setLocationData(res.data))
-        .catch((err) => console.log("Error in fetching location ", err));
-    }
-  }, [IP]);
+    UserLocation();
+  }, []);
 
   return (
     <header id="header" className="border-bottom">
@@ -117,7 +123,9 @@ export const NavBar = () => {
           <div className="d-none d-lg-block align-content-around">
             <button className="btn btn-light border-0"
              onClick={handleLogOut} 
-            >{isAuth ? "LogOut" : "LogIn"}</button>
+            >
+              {isAuth ? "LogOut" : "LogIn"} 
+            </button>
           </div>
           <div className="ps-lg-3 mx-auto">
             <CartButton />

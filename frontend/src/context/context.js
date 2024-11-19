@@ -4,11 +4,6 @@ const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
 
-// const [cart, setCart] = useState(() => {
-//   const savedCart = localStorage.getItem("cart");
-//   return savedCart ? JSON.parse(savedCart) : [];
-// });
-
 const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") ? localStorage.getItem('cart') : "[]"));
 
 useEffect(() => {

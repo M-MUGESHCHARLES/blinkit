@@ -1,30 +1,19 @@
 import { Box, Button, Typography } from '@mui/material';
-import React, { useEffect } from 'react'
+import React from 'react'
 import './LoginPage.css'
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
 
 export const LoginPage = () => {
+    const {handleLogIn } = useAuthContext();
+
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const navigate = useNavigate();
-    // const {isAuth} = useAuthContext();
 
   const onSubmit = (data) => {
     console.log(data);
-    localStorage.setItem("user", JSON.stringify(data));
-    alert(`Logged In successfull`);
-    navigate('/');
+    handleLogIn(data);
   };
-
-//   useEffect(() => {
-//     if (isAuth) {
-//       navigate("/");
-//     }
-//   }, [isAuth]);
-
-  console.log(errors);
-  
+   
   return (
       <>
           <div className="px-2 sticky-top py-4 mb-5">
