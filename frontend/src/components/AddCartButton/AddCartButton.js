@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useDataContext } from '../../context/context';
 
-export const AddCartButton = ({ ProductName }) => {
+export const AddCartButton = ({ ProductName, ProductID }) => {
   const [count, setCount] = useState(0);
 
   const {cart, handleAddToCart } =  useDataContext();
@@ -18,7 +18,7 @@ const handleDecrement = () => {
   // Add to cart whenever count changes
   useEffect(() => {
     if (count > 0) {
-      handleAddToCart({ ProductName, count });
+      handleAddToCart({ProductID, ProductName, count });
     }
   }, [count, ProductName, handleAddToCart]);
 

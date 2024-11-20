@@ -1,8 +1,9 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useDataContext } from '../../context/context';
 import { AddCartButton } from '../../components/AddCartButton/AddCartButton';
 import { ProductData } from '../../assets/Data/Data';
+import NotFoundPage from '../404/NotFoundPage';
 
 export default function ProductDetailsPage() {
     const {product} = useParams();
@@ -11,6 +12,10 @@ export default function ProductDetailsPage() {
     const Details = ProductData.find(
         (P) => P.name === product
     );
+
+    if (!Details) {
+      return <NotFoundPage />; // Redirect to 404 Page
+    };
 
   return (
     <>
@@ -75,8 +80,8 @@ export default function ProductDetailsPage() {
 
           {/* Product Information Section */}
           <div className="col-md-7 px-4 pt-xl-4 py-3 py-lg-0 px-lg-2">
-            <nav className="text-muted fw-semibold mb-2">
-              Home / {Details.category} /
+            <nav className="text-muted fw-semibold mb-4">
+              <Link to='/' className='text-decoration-none text-muted'> Home </Link> / {Details.category} /
               <span className="fw-bold" id="color-G">
                 {Details.name}
               </span>

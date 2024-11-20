@@ -23,7 +23,7 @@ import { Link } from 'react-router-dom'
                         <p className='text-black m-0 product_card_productPrice fw-semibold' >₹{Data.price} </p>
                     </div>
                     <div className='ms-auto pe-2'>
-                        <AddCartButton ProductName={Data.name}/>
+                        <AddCartButton ProductName={Data.name} ProductID={Data.id}/>
                     </div>
                 </div>
          </section>

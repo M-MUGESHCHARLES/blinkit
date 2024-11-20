@@ -1,0 +1,21 @@
+div.cart-container { 
+    /* padding: 20px;  */
+    max-width: 400px; 
+    /* border-color: #f8f8f8;  */
+    /* border-radius: 8px;  */
+}
+
+div.cart-container div.delivery-info {
+ background: #f0f0ff; 
+ /* padding: 15px;  */
+ /* border-radius: 8px;  */
+ /* margin-top: 15px;    */
+} 
+
+div.cart-container div.bill-details {
+    background-color: #f0f0ff;
+}
+
+div.cart-container div.cancellation-policy {
+    font-size: 12px;
+}

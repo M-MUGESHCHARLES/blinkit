@@ -24,7 +24,7 @@ export const CartButton = () => {
         id="offcanvasWithBothOptions"
       >
         <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+          <h5 className="offcanvas-title fw-bold" id="offcanvasWithBothOptionsLabel">
             My Cart
           </h5>
           <button

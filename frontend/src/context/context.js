@@ -21,18 +21,19 @@ useEffect(() => {
 
       if (productExists) {
         return prevCart.map((item) =>
-          item.ProductName === product.ProductName
-            ? { ...item, count: product.count }
+          item.ProductName === product.ProductName && item.ProductID === product.ProductID
+            ? { ...item, Count: product.count }
             : item
         );
       } else {
         return [
           ...prevCart,
-          { ProductName: product.ProductName, count: product.count },
+          { ProductID: product.ProductID, ProductName: product.ProductName, Count: product.count },
         ];
       }
     });
   }, []);
+
 
   const contextValue = {
     setCart,

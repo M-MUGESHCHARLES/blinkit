@@ -1,86 +1,179 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import './CartPage.css';
+import { Button, IconButton } from '@mui/material';
+import { MdDelete } from 'react-icons/md';
+import { useDataContext } from '../../context/context';
+import { ProductData } from "../../assets/Data/Data";
 
 export default function CartPage() {
-    
-    const [quantity, setQuantity] = useState(1);
+  const { cart, setCart } = useDataContext();
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    // Match cart data with ProductData (locally stored data)
+    const enrichedCartItems = cart.map((cartItem) => {
+      const matchedProduct = ProductData.find(
+        (product) => product.id === cartItem.ProductID
+      );
+      return matchedProduct
+        ? {
+            ...matchedProduct,
+            Count: cartItem.Count, // Include count from cart
+          }
+        : cartItem; // Fallback if no match found
+    });
+    setCartItems(enrichedCartItems);
+    console.log(cartItems);
+  }, [cart]);
+
+  
+const handleRemoveProduct = (Id) => {
+  // Get the cart data from localStorage
+  const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // Filter out the product to remove it
+  const updatedCart = storedCart.filter((item) => item.ProductID !== Id);
+  console.log("Before removing product:", storedCart);
+
+  // Update localStorage
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+  console.log("After removing product:", updatedCart);
+
+  // Update the state (cartItems)
+  setCart(updatedCart);
+};
+
+  
   const itemPrice = 71;
   const deliveryCharge = 25;
   const handlingCharge = 4;
-  const total = itemPrice * quantity + deliveryCharge + handlingCharge;
+  const total = 89;
+  const grandTotal = itemPrice + deliveryCharge + handlingCharge;
 
-  const handleIncrement = () => {
-      setQuantity(quantity + 1);
-    };
-
-  const handleDecrement = () => {
-      if (quantity > 1) {
-          setQuantity(quantity - 1);
-        }
-    };
-    return (
+  return (
     <>
-        
-    <div className="cart-container" style={{ padding: '20px', maxWidth: '400px', backgroundColor: '#f8f8f8', borderRadius: '8px' }}>
-      {/* <div className="cart-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h4>My Cart</h4>
-        <button style={{ background: 'none', border: 'none', fontSize: '16px' }}>✕</button>
-      </div> */}
-      
-      <div className="delivery-info" style={{ background: '#f0f0ff', padding: '15px', borderRadius: '8px', marginTop: '15px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span role="img" aria-label="timer">⏱️</span>
-          <div>
-            <p style={{ margin: 0 }}>Delivery in 8 minutes</p>
-            <p style={{ margin: 0, fontSize: '12px' }}>Shipment of 1 item</p>
+      <div className="cart-container">
+        <div className="delivery-info mt-2 rounded p-3">
+          <div className="d-flex gap-3">
+            <span className="my-auto" role="img">
+              ⏱️
+            </span>
+            <div>
+              <p className="m-0">Delivery in 8 minutes</p>
+              <p className="m-0" style={{ fontSize: "12px" }}>
+                Shipment of {cartItems.length} item
+              </p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="item-details" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '15px' }}>
-        <div className="item-image">
-          <img src="https://via.placeholder.com/50" alt="Amul Taaza" style={{ borderRadius: '4px' }} />
-        </div>
-        <div className="item-info" style={{ flex: 1, paddingLeft: '10px' }}>
-          <p>Amul Taaza Homogenised Tone Milk</p>
-          <p>1L</p>
-          <p>₹{itemPrice}</p>
-        </div>
-        <div className="quantity-control" style={{ display: 'flex', alignItems: 'center' }}>
-          <button onClick={handleDecrement} style={{ padding: '5px 10px', fontSize: '16px' }}>−</button>
-          <span style={{ margin: '0 10px' }}>{quantity}</span>
-          <button onClick={handleIncrement} style={{ padding: '5px 10px', fontSize: '16px' }}>+</button>
-        </div>
-      </div>
+        {cartItems.length > 0 ? (
+          cartItems.map((item, index) => (
+            <CartPageProductDetail
+              key={index}
+              item={item}
+              handleRemoveProduct={handleRemoveProduct}
+            />
+          ))
+        ) : (
+          <p className="mx-auto fw-bold text-danger my-5 text-center">
+            Your Cart is Empty
+          </p>
+        )}
 
-      <div className="bill-details" style={{ background: '#f0f0ff', padding: '15px', borderRadius: '8px', marginTop: '15px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span>Items total</span>
-          <span>₹{itemPrice * quantity}</span>
+        <div className="bill-details mt-3 px-4 py-3  rounded-3">
+          <div className="d-flex justify-content-between">
+            <span>Items total</span>
+            <span>₹{total}</span>
+          </div>
+          <div className="d-flex justify-content-between">
+            <span>Delivery charge</span>
+            <span>₹{deliveryCharge}</span>
+          </div>
+          <div className="d-flex justify-content-between">
+            <span>Handling charge</span>
+            <span>₹{handlingCharge}</span>
+          </div>
+          <div className="mt-3 d-flex justify-content-between fw-bold">
+            <span>Grand total</span>
+            <span>₹{grandTotal}</span>
+          </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span>Delivery charge</span>
-          <span>₹{deliveryCharge}</span>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span>Handling charge</span>
-          <span>₹{handlingCharge}</span>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', marginTop: '10px' }}>
-          <span>Grand total</span>
-          <span>₹{total}</span>
-        </div>
-      </div>
 
-      <div className="cancellation-policy" style={{ marginTop: '15px', fontSize: '12px' }}>
-        <p><strong>Cancellation Policy</strong></p>
-        <p>Orders cannot be cancelled once packed for delivery. In case of unexpected delays, a refund will be provided, if applicable.</p>
-      </div>
+        <div className="cancellation-policy mt-3 px-3">
+          <p>
+            <strong>Cancellation Policy</strong>
+          </p>
+          <p>
+            Orders cannot be cancelled once packed for delivery. In case of
+            unexpected delays, a refund will be provided, if applicable.
+          </p>
+        </div>
 
-      <button style={{ width: '100%', padding: '10px', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '5px', fontSize: '16px', marginTop: '15px' }}>
-        ₹{total} TOTAL - Login to Proceed
-      </button>
-    </div>
-  
+        <Button
+          variant="contained"
+          color="success"
+          className="border-0 mt-3 p-3 rounded-3 w-100"
+        >
+          ₹{total} TOTAL
+        </Button>
+      </div>
     </>
+  );
+};
+
+
+// product item details component 
+const CartPageProductDetail = ({ item, handleRemoveProduct}) => {
+  return (
+    <div className="item-details d-flex align-items-center border border-end-0 border-top-0 pe-1 py-1 rounded-4 mt-3 shadow-sm">
+      <div className="item-image col-2">
+        <img
+          className="img-fluid"
+          src={item.img}
+          alt="product"
+          height="auto"
+          width="100%"
+        />
+      </div>
+
+      <div className="item-info px-2 col-8">
+        <p className="m-0 mb-1 text-truncate fw-semibold">{item.name}</p>
+        <p className="m-0 mb-1 text-muted">{item.weight}</p>
+        <p className="m-0 mb-1 fw-semibold">
+          ₹{item.price} &nbsp; * <span className='fw-light'>{item.Count}</span>
+        </p>
+      </div>
+
+      <div className="d-flex flex-column gap-3 col-2">
+        {/* <Button variant="contained" color="success" className="m-0 p-0 ms-auto">
+          <div className="d-flex align-items-center w-100">
+            <span
+              style={{ cursor: "pointer", minWidth: "fit-content" }}
+              className="p-0 m-0 py-2 px-2 h-100 w-auto"
+              // onClick={handleDecrement}
+            >
+              -
+            </span>
+            <span className="mx-auto">{item.Count}</span>
+            <span
+              style={{ cursor: "pointer", minWidth: "fit-content" }}
+              className=" p-0 m-0 py-2 px-2 h-10 w-auto"
+              // onClick={handleIncrement}
+            >
+              +
+            </span>
+          </div>
+        </Button> */}
+
+        <div className="text-center">
+          <IconButton className="text-danger mx-auto"
+          onClick={() => handleRemoveProduct(item.id)}
+          >
+            <MdDelete />
+          </IconButton>
+        </div>
+      </div>
+    </div>
   );
 };

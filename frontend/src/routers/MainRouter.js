@@ -7,6 +7,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { PublicRoute } from "./PublicRoute";
 import { Layout } from "../pages/Layout";
+import NotFoundPage from "../pages/404/NotFoundPage";
 
 export const MainRouter = () => {
   return (
@@ -42,6 +43,9 @@ export const MainRouter = () => {
               </PrivateRoute>
             }
           />
+
+          {/*404 Page  */}
+          <Route path="*" element={<NotFoundPage/>} />
         </Route>
       </Routes>
 

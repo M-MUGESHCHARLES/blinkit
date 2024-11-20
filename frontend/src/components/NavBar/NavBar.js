@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import "./NavBar.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import { CartButton } from "../CartButton/CartButton";
 import { useAuthContext } from "../../context/AuthContext";
 import { GetUserLocation } from "../../apis";
+import { CgProfile } from "react-icons/cg";
 
 export const NavBar = () => {
   const [locationData, setLocationData] = useState(null);
@@ -60,14 +61,14 @@ export const NavBar = () => {
     <header id="header" className="border-bottom">
       <nav className="navbar row m-0 p-0 py-4">
         <div className="col-12 col-lg-5 col-xl-4 d-flex ">
-          <div className="px-2">
-            <h2 className=" Logo m-0 d-inline ps-3 m-0">
+          <div className="px-md-2">
+            <h2 className=" Logo m-0 d-inline ps-md-3 m-0">
               <span id="color-Y">blink</span>
               <span id="color-G">it</span>
             </h2>
           </div>
 
-          <div className="ps-4 d-flex flex-column px-2 justify-content-center">
+          <div className="ps-md-4 d-flex flex-column px-2 justify-content-center">
             <h6 className="fw-bold m-0 " id="Delivery_text">
               Delivery in 8 minutes
             </h6>
@@ -81,9 +82,18 @@ export const NavBar = () => {
               )}
             </p>
           </div>
+
+          <div className="d-inline-block d-lg-none ms-auto ">
+            <IconButton className="bg-warning" onClick={handleLogOut}>
+              <CgProfile />
+            </IconButton>
+          </div>
         </div>
 
-        <div className="col-12 col-lg-5 col-xl-6 pt-3 pt-lg-0 px-3" id="SearchBar_div">
+        <div
+          className="col-12 col-lg-5 col-xl-6 pt-3 pt-lg-0 px-3 "
+          id="SearchBar_div"
+        >
           <div
             className="d-flex search-container border border-1 rounded-3 px-2 overflow-hidden"
             onClick={handleClick}
@@ -121,10 +131,8 @@ export const NavBar = () => {
           id="Cart_Button_sm_screen"
         >
           <div className="d-none d-lg-block align-content-around">
-            <button className="btn btn-light border-0"
-             onClick={handleLogOut} 
-            >
-              {isAuth ? "LogOut" : "LogIn"} 
+            <button className="btn btn-light border-0" onClick={handleLogOut}>
+              {isAuth ? "LogOut" : "LogIn"}
             </button>
           </div>
           <div className="ps-lg-3 mx-auto">

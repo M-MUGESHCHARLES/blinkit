@@ -1,5 +1,5 @@
 import axios from "axios";
 
-export const LocationApi = (path) => {
+export const GETLocationApi = (path) => {
     return axios.get(path);
 };
