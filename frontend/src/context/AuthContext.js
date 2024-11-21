@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDataContext } from "./context";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
+  // const {setCart} = useDataContext();
 
     // const [isAuth, setIsAuth] = useState(false); //// using component memory
     
@@ -17,6 +19,7 @@ export const AuthProvider = ({ children }) => {
   const handleLogOut = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('cart');
+    // setCart([]);
     setIsAuth(false);
     console.log("Logged Out successfully");
     navigate("/login");
@@ -33,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log("user log in ? ", isAuth);  //// to verify the state after the user log-in
+    console.log("User logged in ? ", isAuth);  //// to verify the state after the user log-in
   }, [isAuth]);
 
   const contextValue = {

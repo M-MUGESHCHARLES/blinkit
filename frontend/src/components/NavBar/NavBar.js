@@ -46,7 +46,7 @@ export const NavBar = () => {
       try {
         const response = await GetUserLocation();
         if(response?.status === 200){
-          console.log('User location data fetched successfully');
+          // console.log('User location data fetched successfully');
           setLocationData(response.data);
         }
       }catch(err) {

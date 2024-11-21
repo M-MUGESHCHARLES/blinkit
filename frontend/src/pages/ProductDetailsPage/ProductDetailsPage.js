@@ -4,13 +4,14 @@ import { useDataContext } from '../../context/context';
 import { AddCartButton } from '../../components/AddCartButton/AddCartButton';
 import { ProductData } from '../../assets/Data/Data';
 import NotFoundPage from '../404/NotFoundPage';
+import ProductCardComponent from '../../components/ProductCardComponent/ProductCardComponent';
 
 export default function ProductDetailsPage() {
-    const {product} = useParams();
+    const {productID} = useParams();
     const {} = useDataContext();
 
     const Details = ProductData.find(
-        (P) => P.name === product
+        (P) => P.id === Number(productID)
     );
 
     if (!Details) {
@@ -19,7 +20,20 @@ export default function ProductDetailsPage() {
 
   return (
     <>
-      <div className="container my-5">
+      <div className="container mt-5 mb-3">
+        <div className="row">
+          {/* Bread crumbs */}
+          <nav className="text-muted fw-semibold mb-4">
+            <Link to="/" className="text-decoration-none text-muted">
+              Home
+            </Link>
+            / {Details.category} /
+            <span className="fw-bold" id="color-G">
+              {Details.name}
+            </span>
+          </nav>
+        </div>
+
         <div className="row">
           {/* Product Image Section */}
           <div className="col-md-5 d-flex flex-column m-0 align-content-around text-center">
@@ -80,14 +94,10 @@ export default function ProductDetailsPage() {
 
           {/* Product Information Section */}
           <div className="col-md-7 px-4 pt-xl-4 py-3 py-lg-0 px-lg-2">
-            <nav className="text-muted fw-semibold mb-4">
-              <Link to='/' className='text-decoration-none text-muted'> Home </Link> / {Details.category} /
-              <span className="fw-bold" id="color-G">
-                {Details.name}
-              </span>
-            </nav>
             <h1 className="h4 mb-2">{Details.name}</h1>
-            <p className="text-muted small">⏱️ {Details.duration} MINS</p>
+            <p className="text-muted small badge text-bg-warning">
+              ⏱️ {Details.duration} MINS
+            </p>
             <p>
               <a href="/" className="text-success">
                 View all by {Details.brand} &rarr;
@@ -95,7 +105,7 @@ export default function ProductDetailsPage() {
             </p>
 
             <div className="my-3">
-              <span className="h5">₹{Details.price}</span>
+              <span className="display-6 fw-medium">₹{Details.price}</span>
               <span className="text-muted ms-2 text-decoration-line-through">
                 MRP ₹{Details.mrp}
               </span>
@@ -103,7 +113,7 @@ export default function ProductDetailsPage() {
             <p className="text-muted small">{Details.description}</p>
 
             {/* Quantity Control */}
-            <AddCartButton ProductName={Details.name} />
+            <AddCartButton ProductName={Details.name} ProductID={Details.id} />
 
             {/* Why Shop Section */}
             <h3 className="h6 mt-4">Why shop from us?</h3>
@@ -121,6 +131,34 @@ export default function ProductDetailsPage() {
           </div>
         </div>
       </div>
+
+      {/* Recommended Products section */}
+      <section className="">
+        <div className="d-flex justify-content-between px-4 pb-1">
+          <h5 className="fw-semibold d-inline-block m-0">
+            Recommended Products
+          </h5>
+          <h6 className="text-success my-auto m-0">see all</h6>
+        </div>
+
+        <div
+          id="Products"
+          className="d-flex justify-content-evenly m-0 overflow-y-hidden px-3 py-2"
+        >
+          {ProductData.filter(
+            (P) => P.category === Details.category && P.name !== Details.name
+          ).map((P, index) => (
+            <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
+              <ProductCardComponent Data={P} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Recently Viewed Products section */}
+      <section className=''>
+
+      </section>
     </>
   );
 };

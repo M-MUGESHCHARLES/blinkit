@@ -1,15 +1,25 @@
+// large banner
 import png1 from "../Png/banner-png.png";
+// Product images
 import Product1 from "../Product-sample/Product-1.jpg";
 import Product2 from "../Product-sample/product-2.jpg";
 import Product3 from "../Product-sample/product-3.jpg";
 import Product4 from "../Product-sample/product-4.png";
 import Product5 from "../Product-sample/product-5.jpg";
 import Product6 from "../Product-sample/product-6.png";
+import Product7 from "../Product-sample/product-7.jpg";
+import Product8 from "../Product-sample/product-8.jpg";
+import Product9 from "../Product-sample/product-9.jpg";
+import Product10 from "../Product-sample/product-10.jpg";
+import Product11 from "../Product-sample/product-11.jpg";
+import Product12 from "../Product-sample/product-12.jpg";
+
+// products display 
+import p1 from "../Products-image-large-screen/p1.jpeg";
+import p2 from "../Products-image-large-screen/p5.png";
 import p3 from "../Products-image-large-screen/p2.png";
 import p4 from "../Products-image-large-screen/p3.png";
-import p1 from "../Products-image-large-screen/p1.jpeg";
 import p5 from "../Products-image-large-screen/p4.png";
-import p2 from "../Products-image-large-screen/p5.png";
 import p6 from "../Products-image-large-screen/p-6.png";
 import p7 from "../Products-image-large-screen/Slice-7_3.png";
 import p8 from "../Products-image-large-screen/Slice-8_4.png";
@@ -58,7 +68,7 @@ export const BannerData = [
 
 export const ProductData = [
   {
-    id:1,
+    id: 1,
     img: Product1,
     name: "Amul Taaza",
     duration: 8,
@@ -67,7 +77,7 @@ export const ProductData = [
     mrp: 74,
     description: "Inclusive of all taxes",
     brand: "Amul",
-    category: "Milk",
+    category: "Dairy",
     offers: [
       {
         icon: "🚀",
@@ -90,7 +100,7 @@ export const ProductData = [
     ],
   },
   {
-    id:2,
+    id: 2,
     img: Product2,
     name: "Mother Dairy Classic Curd",
     duration: 8,
@@ -99,7 +109,7 @@ export const ProductData = [
     mrp: 74,
     description: "Inclusive of all taxes",
     brand: "Amul",
-    category: "Milk",
+    category: "Dairy",
     offers: [
       {
         icon: "🚀",
@@ -122,7 +132,7 @@ export const ProductData = [
     ],
   },
   {
-    id:3,
+    id: 3,
     img: Product3,
     name: "Amul Taaza Toned Fresh Milk",
     duration: 8,
@@ -131,7 +141,7 @@ export const ProductData = [
     mrp: 74,
     description: "Inclusive of all taxes",
     brand: "Amul",
-    category: "Milk",
+    category: "Dairy",
     offers: [
       {
         icon: "🚀",
@@ -154,7 +164,7 @@ export const ProductData = [
     ],
   },
   {
-    id:4,
+    id: 4,
     img: Product4,
     name: "Amul Masti Curd",
     duration: 8,
@@ -163,7 +173,7 @@ export const ProductData = [
     mrp: 74,
     description: "Inclusive of all taxes",
     brand: "Amul",
-    category: "Milk",
+    category: "Dairy",
     offers: [
       {
         icon: "🚀",
@@ -186,7 +196,7 @@ export const ProductData = [
     ],
   },
   {
-    id:5,
+    id: 5,
     img: Product5,
     name: "Amul Salted Butter",
     duration: 8,
@@ -195,7 +205,7 @@ export const ProductData = [
     mrp: 74,
     description: "Inclusive of all taxes",
     brand: "Amul",
-    category: "Milk",
+    category: "Dairy",
     offers: [
       {
         icon: "🚀",
@@ -218,7 +228,7 @@ export const ProductData = [
     ],
   },
   {
-    id:6,
+    id: 6,
     img: Product6,
     name: "Mother Dairy Classic Dahi",
     duration: 8,
@@ -227,7 +237,199 @@ export const ProductData = [
     mrp: 74,
     description: "Inclusive of all taxes",
     brand: "Amul",
-    category: "Milk",
+    category: "Dairy",
+    offers: [
+      {
+        icon: "🚀",
+        title: "Superfast Delivery",
+        description:
+          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
+      },
+      {
+        icon: "💸",
+        title: "Best Prices & Offers",
+        description:
+          "Best price destination with offers directly from the manufacturers.",
+      },
+      {
+        icon: "📦",
+        title: "Wide Assortment",
+        description:
+          "Choose from 5000+ products across food, personal care, household & other categories.",
+      },
+    ],
+  },
+  {
+    id: 7,
+    img: Product7,
+    name: "Kettle Studio Potato Chips - Rock Sea Salt & English Vinegar",
+    duration: 8,
+    weight: "113 g",
+    price: 99,
+    mrp: 100,
+    description: "Inclusive of all taxes",
+    brand: "Kettle Studio",
+    category: "Snack",
+    offers: [
+      {
+        icon: "🚀",
+        title: "Superfast Delivery",
+        description:
+          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
+      },
+      {
+        icon: "💸",
+        title: "Best Prices & Offers",
+        description:
+          "Best price destination with offers directly from the manufacturers.",
+      },
+      {
+        icon: "📦",
+        title: "Wide Assortment",
+        description:
+          "Choose from 5000+ products across food, personal care, household & other categories.",
+      },
+    ],
+  },
+  {
+    id: 8,
+    img: Product8,
+    name: "Orion Turtle Masala Corn Chips",
+    duration: 8,
+    weight: "115 g",
+    price: 90,
+    mrp: 100,
+    description: "Inclusive of all taxes",
+    brand: "Orion",
+    category: "Snack",
+    offers: [
+      {
+        icon: "🚀",
+        title: "Superfast Delivery",
+        description:
+          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
+      },
+      {
+        icon: "💸",
+        title: "Best Prices & Offers",
+        description:
+          "Best price destination with offers directly from the manufacturers.",
+      },
+      {
+        icon: "📦",
+        title: "Wide Assortment",
+        description:
+          "Choose from 5000+ products across food, personal care, household & other categories.",
+      },
+    ],
+  },
+  {
+    id: 9,
+    img: Product9,
+    name: "Cheetos Cheese Flavoured Puffs",
+    duration: 8,
+    weight: "24.8 g",
+    price: 161,
+    mrp: 170,
+    description: "Inclusive of all taxes",
+    brand: "Cheetos",
+    category: "Snack",
+    offers: [
+      {
+        icon: "🚀",
+        title: "Superfast Delivery",
+        description:
+          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
+      },
+      {
+        icon: "💸",
+        title: "Best Prices & Offers",
+        description:
+          "Best price destination with offers directly from the manufacturers.",
+      },
+      {
+        icon: "📦",
+        title: "Wide Assortment",
+        description:
+          "Choose from 5000+ products across food, personal care, household & other categories.",
+      },
+    ],
+  },
+  {
+    id: 10,
+    img: Product10,
+    name: "Kettle Studio Potato Chips - Himalyan Pink Salt",
+    duration: 8,
+    weight: "113 g",
+    price: 99,
+    mrp: 100,
+    description: "Inclusive of all taxes",
+    brand: "Kettle Studio",
+    category: "Snack",
+    offers: [
+      {
+        icon: "🚀",
+        title: "Superfast Delivery",
+        description:
+          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
+      },
+      {
+        icon: "💸",
+        title: "Best Prices & Offers",
+        description:
+          "Best price destination with offers directly from the manufacturers.",
+      },
+      {
+        icon: "📦",
+        title: "Wide Assortment",
+        description:
+          "Choose from 5000+ products across food, personal care, household & other categories.",
+      },
+    ],
+  },
+  {
+    id: 11,
+    img: Product11,
+    name: "Orion Turtle Sour Cream & Onion Corn Chips",
+    duration: 8,
+    weight: "115 g",
+    price: 90,
+    mrp: 100,
+    description: "Inclusive of all taxes",
+    brand: "Orion",
+    category: "Snack",
+    offers: [
+      {
+        icon: "🚀",
+        title: "Superfast Delivery",
+        description:
+          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
+      },
+      {
+        icon: "💸",
+        title: "Best Prices & Offers",
+        description:
+          "Best price destination with offers directly from the manufacturers.",
+      },
+      {
+        icon: "📦",
+        title: "Wide Assortment",
+        description:
+          "Choose from 5000+ products across food, personal care, household & other categories.",
+      },
+    ],
+  },
+  {
+    id: 12,
+    img: Product12,
+    name: "Orion Turtle Spicy Devil Corn Chips",
+    duration: 8,
+    weight: "115 g",
+    price: 90,
+    mrp: 100,
+    description: "Inclusive of all taxes",
+    brand: "Orion",
+    category: "Snack",
     offers: [
       {
         icon: "🚀",

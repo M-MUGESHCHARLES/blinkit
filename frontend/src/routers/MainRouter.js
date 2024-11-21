@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 import { HomePage } from "../pages/HomePage/HomePage";
 import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage";
@@ -14,7 +14,6 @@ export const MainRouter = () => {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-
           {/* Public routes */}
           <Route
             path="/login"
@@ -27,7 +26,7 @@ export const MainRouter = () => {
 
           {/* Private routes */}
           <Route
-            index  
+            index
             element={
               <PrivateRoute>
                 <HomePage />
@@ -36,7 +35,7 @@ export const MainRouter = () => {
           />
 
           <Route
-            path=":product"
+            path="/:category/:productID"
             element={
               <PrivateRoute>
                 <ProductDetailsPage />
@@ -45,11 +44,9 @@ export const MainRouter = () => {
           />
 
           {/*404 Page  */}
-          <Route path="*" element={<NotFoundPage/>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
-
-    
     </>
   );
 };

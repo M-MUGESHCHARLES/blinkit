@@ -1,7 +1,7 @@
 import "./Home.css";
 import banner_lg from "../../assets/banner-lg.jpg";
 import Slider from "react-slick";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { BannerComponent } from "../../components/BannerComponent/BannerComponent";
 import {NavBar } from '../../components/NavBar/NavBar'
@@ -11,7 +11,19 @@ import { BannerData, ProductsDisplay, ProductData } from "../../assets/Data/Data
 
 export const HomePage = () => {
 
-  const {} = useDataContext(); 
+  const {viewedProduct} = useDataContext(); 
+  const [recentlyViewed , setRecentlyViewed] = useState([]);
+  console.log(`viewed product data : ${JSON.stringify(viewedProduct)} `);
+
+  useEffect(() => {
+    setRecentlyViewed(viewedProduct);
+  },[viewedProduct]);
+
+  console.log("Recently Viewed:", recentlyViewed);
+  console.log(
+    "Filtered Products:",
+    ProductData.filter((P) => recentlyViewed.some((item) => item.id === P.id))
+  );
 
   return (
     <>
@@ -21,18 +33,18 @@ export const HomePage = () => {
         <section id="Banner" className="">
           {/* large banner */}
           <BannerSlider />
-  
+
           <div className="row m-0 p-3">
             {BannerData.map((Banner, index) => (
               <div className="col-12 col-md-4 py-1 py-md-0" key={index}>
-                <BannerComponent Data={Banner}  />
+                <BannerComponent Data={Banner} />
               </div>
             ))}
           </div>
         </section>
-  
+
         {/* product section */}
-  
+
         <section className="px-2">
           <div className="parent_div_productDisplay m-0 p-0">
             {ProductsDisplay.map((P, index) => (
@@ -51,22 +63,66 @@ export const HomePage = () => {
             ))}
           </div>
         </section>
+        {/* Dairy category products display section */}
         <section className="px-0 px-md-2 px-lg-3 py-3">
           <div className="d-flex justify-content-between px-3 pb-1">
             <h5 className="fw-semibold d-inline-block m-0">
-              Dairy, Bread & Eggs
+              Dairy, Breads & Eggs
             </h5>
             <h6 className="text-success my-auto m-0">see all</h6>
           </div>
-  
+
           <div id="Products" className="row m-0 py-2">
-            {ProductData.map((P, index) => (
-              <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
-                <ProductCardComponent Data={P} />
-              </div>
-            ))}
+            {ProductData.filter((P) => P.category === "Dairy").map(
+              (P, index) => (
+                <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
+                  <ProductCardComponent Data={P} />
+                </div>
+              )
+            )}
           </div>
         </section>
+        {/* Snack category products display section */}
+        <section className="px-0 px-md-2 px-lg-3 py-3">
+          <div className="d-flex justify-content-between px-3 pb-1">
+            <h5 className="fw-semibold d-inline-block m-0">
+              Snacks & Munchies
+            </h5>
+            <h6 className="text-success my-auto m-0">see all</h6>
+          </div>
+
+          <div id="Products" className="row m-0 py-2">
+            {ProductData.filter((P) => P.category === "Snack").map(
+              (P, index) => (
+                <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
+                  <ProductCardComponent Data={P} />
+                </div>
+              )
+            )}
+          </div>
+        </section>
+        {/* Recently viewed products section */}
+        {recentlyViewed.length > 4 && (
+                    <section className="px-0 px-md-2 px-lg-3 py-3">
+          <div className="d-flex px-3 pb-1">
+            <h5 className="fw-semibold d-inline-block m-0">Recently viewed</h5>
+          </div>
+
+          <div id="Products" className="row m-0 py-2">
+            {recentlyViewed.length > 0 ? (
+              ProductData.filter((P) =>
+                recentlyViewed.some((item) => item.id === P.id)
+              ).map((P, index) => (
+                <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
+                  <ProductCardComponent Data={P} />
+                </div>
+              ))
+            ) : (
+              <p>No recently viewed products available.</p>
+            )}
+          </div>
+        </section>
+        )}
       </main>
     </>
   );

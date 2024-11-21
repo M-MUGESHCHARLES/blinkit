@@ -2,13 +2,16 @@
 import { IoMdStopwatch } from 'react-icons/io'
 import { AddCartButton } from '../AddCartButton/AddCartButton'
 import { Link } from 'react-router-dom'
+import { useDataContext } from '../../context/context'
  
  export default function ProductCardComponent({Data}) {
-    
+
+    const {handleViewedProduct } = useDataContext();
+     
    return (
      <>
          <section className='row m-0 p-0 border border-secondary-subtle shadow rounded-3 card h-100' id='ProductCard'>
-            <Link to={Data.name} className='p-0 m-0' >
+            <Link to={`/${Data.category}/${Data.id}`} className='p-0 m-0' onClick={() => handleViewedProduct(Data) } >
               <div className='m-0 text-center'>
                   <img src={Data.img} className='img-fluid rounded-5' alt='product' height='auto' width='100%' />
               </div>

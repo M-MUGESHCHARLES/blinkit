@@ -83,7 +83,7 @@ const handleRemoveProduct = (Id) => {
         )}
 
         <div className="bill-details mt-3 px-4 py-3  rounded-3">
-          <h6 className='fw-bold mb-2'> Bill Details : </h6>
+          <h6 className='fw-bold mb-2 '> Bill Details : </h6>
           <div className="d-flex justify-content-between">
             <span> <IoIosListBox /> Items total</span>
             <span>₹{total}</span>
