@@ -4,6 +4,9 @@ import { Button, IconButton } from '@mui/material';
 import { MdDelete } from 'react-icons/md';
 import { useDataContext } from '../../context/context';
 import { ProductData } from "../../assets/Data/Data";
+import { RiEBike2Fill } from 'react-icons/ri';
+import { IoIosListBox } from 'react-icons/io';
+import { IoHandLeft } from 'react-icons/io5';
 
 export default function CartPage() {
   const { cart, setCart } = useDataContext();
@@ -43,12 +46,10 @@ const handleRemoveProduct = (Id) => {
   setCart(updatedCart);
 };
 
-  
-  const itemPrice = 71;
+  const total = cartItems.reduce((acc, item) => acc + item.price * item.Count, 0);  
   const deliveryCharge = 25;
-  const handlingCharge = 4;
-  const total = 89;
-  const grandTotal = itemPrice + deliveryCharge + handlingCharge;
+  const handlingCharge = 25;
+  const grandTotal = total + deliveryCharge + handlingCharge;
 
   return (
     <>
@@ -82,16 +83,19 @@ const handleRemoveProduct = (Id) => {
         )}
 
         <div className="bill-details mt-3 px-4 py-3  rounded-3">
+          <h6 className='fw-bold mb-2'> Bill Details : </h6>
           <div className="d-flex justify-content-between">
-            <span>Items total</span>
+            <span> <IoIosListBox /> Items total</span>
             <span>₹{total}</span>
           </div>
           <div className="d-flex justify-content-between">
-            <span>Delivery charge</span>
+            <span>
+              <RiEBike2Fill />  Delivery charge
+            </span>
             <span>₹{deliveryCharge}</span>
           </div>
           <div className="d-flex justify-content-between">
-            <span>Handling charge</span>
+            <span> <IoHandLeft /> Handling charge</span>
             <span>₹{handlingCharge}</span>
           </div>
           <div className="mt-3 d-flex justify-content-between fw-bold">
@@ -113,9 +117,9 @@ const handleRemoveProduct = (Id) => {
         <Button
           variant="contained"
           color="success"
-          className="border-0 mt-3 p-3 rounded-3 w-100"
+          className="border-0 mt-3 p-3 rounded-3 w-100 fw-bold"
         >
-          ₹{total} TOTAL
+          ₹{grandTotal} TOTAL
         </Button>
       </div>
     </>
