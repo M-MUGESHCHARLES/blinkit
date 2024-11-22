@@ -3,15 +3,30 @@ import React from 'react'
 import './LoginPage.css'
 import { useForm } from 'react-hook-form';
 import { useAuthContext } from '../../context/AuthContext';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export const LoginPage = () => {
-    const {handleLogIn } = useAuthContext();
+    const {handleLogIn, setIsAuth } = useAuthContext();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log('Login form data', data);
     handleLogIn(data);
+
+    const url = `http://localhost:4200/login`;
+
+    axios.post(url, data)
+    .then((res) => {
+      // console.log(res.data);
+      if(res.status === 200 ){
+        setIsAuth(true);
+        // console.log('status 200');
+      }      
+    }).catch((err) => {
+      console.log('Error login : ', err.response?.data?.error || "An error occurred");
+    });
   };
    
   return (
@@ -76,6 +91,12 @@ export const LoginPage = () => {
               >
                 Login
               </Button>
+
+              <div class="d-flex pb-2 pt-3">
+              <span> New User ?
+              <Link to='/signup' className='text-decoration-none'> Sign-Up </Link></span>
+            </div>
+
             </form>
           </div>
         </Box>

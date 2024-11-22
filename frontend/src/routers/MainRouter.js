@@ -8,6 +8,7 @@ import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { PublicRoute } from "./PublicRoute";
 import { Layout } from "../pages/Layout";
 import NotFoundPage from "../pages/404/NotFoundPage";
+import { SignUpPage } from "../pages/SignUpPage/SignUpPage";
 
 export const MainRouter = () => {
   return (
@@ -21,6 +22,15 @@ export const MainRouter = () => {
               <PublicRoute>
                 <LoginPage />
               </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/signup"
+            element={
+              <PublicRoute>
+                <SignUpPage />
+              </PublicRoute> 
             }
           />
 

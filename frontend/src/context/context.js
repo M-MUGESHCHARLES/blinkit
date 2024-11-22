@@ -9,7 +9,7 @@ const [viewedProduct, setViewedProduct] = useState(JSON.parse(localStorage.getIt
 
   useEffect(() => {
     localStorage.setItem('viewedProducts', JSON.stringify(viewedProduct));
-    console.log(`Viewed product : ${JSON.stringify(viewedProduct)}`);
+    // console.log(`Viewed product : ${JSON.stringify(viewedProduct)}`);
   }, [viewedProduct]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const [viewedProduct, setViewedProduct] = useState(JSON.parse(localStorage.getIt
     console.log(`Viewed products : ${JSON.stringify(viewedProduct)}`);
   };
 
-  
+
 
   const contextValue = {
     setCart,

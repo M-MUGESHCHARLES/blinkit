@@ -7,8 +7,6 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   // const {setCart} = useDataContext();
-
-    // const [isAuth, setIsAuth] = useState(false); //// using component memory
     
     const [isAuth, setIsAuth] = useState(() => {
         const storedUser = localStorage.getItem("user");
@@ -30,7 +28,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(data));
     setIsAuth(true);
     console.log('Logged In successfull', data);
-    console.log("log in Auth (before re-render):", isAuth);
+    // console.log("log in Auth (before re-render):", isAuth);
     navigate('/');
     // alert(`Logged In successfull`);
   };
@@ -43,6 +41,7 @@ export const AuthProvider = ({ children }) => {
     isAuth,
     handleLogOut,
     handleLogIn,
+    setIsAuth,
   };
 
 

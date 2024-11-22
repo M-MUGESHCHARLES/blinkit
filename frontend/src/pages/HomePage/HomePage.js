@@ -10,20 +10,26 @@ import { useDataContext } from "../../context/context";
 import { BannerData, ProductsDisplay, ProductData } from "../../assets/Data/Data";
 
 export const HomePage = () => {
-
-  const {viewedProduct} = useDataContext(); 
-  const [recentlyViewed , setRecentlyViewed] = useState([]);
-  console.log(`viewed product data : ${JSON.stringify(viewedProduct)} `);
+  const { viewedProduct } = useDataContext();
+  const [recentlyViewed, setRecentlyViewed] = useState([]);
+  // console.log(`viewed product data : ${JSON.stringify(viewedProduct)} `);
 
   useEffect(() => {
     setRecentlyViewed(viewedProduct);
-  },[viewedProduct]);
+  }, [viewedProduct]);
 
-  console.log("Recently Viewed:", recentlyViewed);
-  console.log(
-    "Filtered Products:",
-    ProductData.filter((P) => recentlyViewed.some((item) => item.id === P.id))
+  // Filter and sort products based on recently viewed order
+
+  const filteredProducts = ProductData.filter((P) =>
+    recentlyViewed.slice(-6).some((item) => item.id === P.id)
+  ).sort(
+    (a, b) =>
+      recentlyViewed.findIndex((item) => item.id === b.id) -
+      recentlyViewed.findIndex((item) => item.id === a.id)
   );
+
+  // console.log("Recently Viewed:", recentlyViewed);
+  // console.log("Filtered Products:", filteredProducts);
 
   return (
     <>
@@ -102,26 +108,27 @@ export const HomePage = () => {
           </div>
         </section>
         {/* Recently viewed products section */}
-        {recentlyViewed.length > 4 && (
-                    <section className="px-0 px-md-2 px-lg-3 py-3">
-          <div className="d-flex px-3 pb-1">
-            <h5 className="fw-semibold d-inline-block m-0">Recently viewed</h5>
-          </div>
+        {filteredProducts.length > 4 && (
+          <section className="px-0 px-md-2 px-lg-3 py-3">
+            <div className="d-flex px-3 pb-1">
+              <h5 className="fw-semibold d-inline-block m-0">
+                Recently viewed
+              </h5>
+            </div>
 
-          <div id="Products" className="row m-0 py-2">
-            {recentlyViewed.length > 0 ? (
-              ProductData.filter((P) =>
-                recentlyViewed.some((item) => item.id === P.id)
-              ).map((P, index) => (
-                <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
-                  <ProductCardComponent Data={P} />
-                </div>
-              ))
-            ) : (
-              <p>No recently viewed products available.</p>
-            )}
-          </div>
-        </section>
+            <div id="Products" className="row m-0 py-2">
+              {filteredProducts.length > 4
+                ? filteredProducts.map((P, index) => (
+                    <div
+                      className="col-6 col-md-4 col-lg-2 m-0 p-1"
+                      key={index}
+                    >
+                      <ProductCardComponent Data={P} />
+                    </div>
+                  ))
+                : null}
+            </div>
+          </section>
         )}
       </main>
     </>

@@ -62,18 +62,18 @@ div.slick-slide.slick-active div div {
 }
 
 .child_div_productDisplay {
-  flex: 0 0 16.6667%; 
+  flex: 0 0 16.6667% !important; 
 }
 
 @media (min-width: 768px) {
   .child_div_productDisplay {
-    flex: 0 0 12.5%;
+    flex: 0 0 12.5% !important;
   }
 }
 
 /* Large screens: 10 columns */
-@media (min-width: 1020px) {
+@media (width > 1020px) {
   .child_div_productDisplay {
-    flex: 0 0 10%; 
+    flex: 0 0 10% !important; 
   }
 }
