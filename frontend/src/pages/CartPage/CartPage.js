@@ -7,10 +7,13 @@ import { ProductData } from "../../assets/Data/Data";
 import { RiEBike2Fill } from 'react-icons/ri';
 import { IoIosListBox } from 'react-icons/io';
 import { IoHandLeft } from 'react-icons/io5';
+import axios from 'axios';
 
 export default function CartPage() {
-  const { cart, setCart } = useDataContext();
+  const { cart, handleRemoveProduct} =
+    useDataContext();
   const [cartItems, setCartItems] = useState([]);
+
 
   useEffect(() => {
     // Match cart data with ProductData (locally stored data)
@@ -26,27 +29,15 @@ export default function CartPage() {
         : cartItem; // Fallback if no match found
     });
     setCartItems(enrichedCartItems);
-    console.log(cartItems);
+    // console.log('cart items : ' ,cartItems);
+    // console.log('cart : ',cart);
   }, [cart]);
 
-  
-const handleRemoveProduct = (Id) => {
-  // Get the cart data from localStorage
-  const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  // Filter out the product to remove it
-  const updatedCart = storedCart.filter((item) => item.ProductID !== Id);
-  console.log("Before removing product:", storedCart);
-
-  // Update localStorage
-  localStorage.setItem("cart", JSON.stringify(updatedCart));
-  console.log("After removing product:", updatedCart);
-
-  // Update the state (cartItems)
-  setCart(updatedCart);
-};
-
-  const total = cartItems.reduce((acc, item) => acc + item.price * item.Count, 0);  
+  const total = cartItems.reduce(
+    (acc, item) => acc + item.price * item.Count,
+    0
+  );
   const deliveryCharge = 25;
   const handlingCharge = 25;
   const grandTotal = total + deliveryCharge + handlingCharge;
@@ -83,24 +74,28 @@ const handleRemoveProduct = (Id) => {
         )}
 
         <div className="bill-details mt-3 px-4 py-3  rounded-3">
-          <h6 className='fw-bold mb-2 '> Bill Details : </h6>
+          <h6 className="fw-bold mb-2 "> Bill Details : </h6>
           <div className="d-flex justify-content-between">
-            <span> <IoIosListBox /> Items total</span>
+            <span>
+              <IoIosListBox /> Items total
+            </span>
             <span>₹{total}</span>
           </div>
           <div className="d-flex justify-content-between">
             <span>
-              <RiEBike2Fill />  Delivery charge
+              <RiEBike2Fill /> Delivery charge
             </span>
-            <span>₹{deliveryCharge}</span>
+            <span>₹{cartItems.length === 0 ? 0 : deliveryCharge}</span>
           </div>
           <div className="d-flex justify-content-between">
-            <span> <IoHandLeft /> Handling charge</span>
-            <span>₹{handlingCharge}</span>
+            <span>
+              <IoHandLeft /> Handling charge
+            </span>
+            <span>₹{cartItems.length === 0 ? 0 : handlingCharge}</span>
           </div>
           <div className="mt-3 d-flex justify-content-between fw-bold">
             <span>Grand total</span>
-            <span>₹{grandTotal}</span>
+            <span>₹{cartItems.length === 0 ? 0 : grandTotal}</span>
           </div>
         </div>
 
@@ -119,7 +114,7 @@ const handleRemoveProduct = (Id) => {
           color="success"
           className="border-0 mt-3 p-3 rounded-3 w-100 fw-bold"
         >
-          ₹{grandTotal} TOTAL
+          ₹{cartItems.length === 0 ? 0 : grandTotal} TOTAL
         </Button>
       </div>
     </>

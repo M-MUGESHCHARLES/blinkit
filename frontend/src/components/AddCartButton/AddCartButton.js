@@ -1,11 +1,14 @@
 import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useDataContext } from '../../context/context';
+import axios from 'axios';
+import { useAuthContext } from '../../context/AuthContext';
 
 export const AddCartButton = ({ ProductName, ProductID }) => {
   const [count, setCount] = useState(0);
 
-  const {cart, handleAddToCart } =  useDataContext();
+  const { cart, handleAddToCart } = useDataContext();
+  const{userID} = useAuthContext();
 
   // -------------- Handle increment and Decrement
 const handleIncrement = () => {
@@ -17,10 +20,36 @@ const handleDecrement = () => {
 
   // Add to cart whenever count changes
   useEffect(() => {
+
+    console.log("User ID ", userID);
+
+    const NewData = {
+      userID,
+      item: {
+        ProductID,
+        ProductCount: count,
+      },
+    };
+
     if (count > 0) {
-      handleAddToCart({ProductID, ProductName, count });
+      handleAddToCart({ProductID, count });
+      addToCart(NewData);
     }
-  }, [count, ProductName, handleAddToCart]);
+  }, [count, handleAddToCart, ProductID]);
+
+  const addToCart = (data) => {
+    axios
+      .put(`http://localhost:4200/add-to-cart`, data )
+      .then((response) => {
+        console.log("Updated user data:", response.data);
+      })
+      .catch((error) => {
+        console.error(
+          "Error adding to cart:",
+          error.response?.data?.error || "An error occurred"
+        );
+      });
+  };
 
   return (
     <Button

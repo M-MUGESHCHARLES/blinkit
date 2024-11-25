@@ -5,32 +5,27 @@ import { useDataContext } from "./context";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
-  // const {setCart} = useDataContext();
-    
+  const navigate = useNavigate();   
     const [isAuth, setIsAuth] = useState(() => {
         const storedUser = localStorage.getItem("user");
         return storedUser ? true : false;
-    });    //// using localstorage by Check whether 'user' data exists in localStorage or not 
+    });    //// using localstorage by Check whether 'user' data exists in localStorage or not  
 
+    const [userID, setUserID] = useState(null);
+    useEffect(() => {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      if (storedUser && storedUser.UserID) {
+        setUserID(storedUser.UserID); 
+      }
+    }, []);
 
   const handleLogOut = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('cart');
-    // setCart([]);
     setIsAuth(false);
     console.log("Logged Out successfully");
     navigate("/login");
     // alert("Logged Out successfully");
-  };
-
-  const handleLogIn = (data) => {
-    localStorage.setItem('user', JSON.stringify(data));
-    setIsAuth(true);
-    console.log('Logged In successfull', data);
-    // console.log("log in Auth (before re-render):", isAuth);
-    navigate('/');
-    // alert(`Logged In successfull`);
   };
 
   useEffect(() => {
@@ -40,10 +35,10 @@ export const AuthProvider = ({ children }) => {
   const contextValue = {
     isAuth,
     handleLogOut,
-    handleLogIn,
     setIsAuth,
+    setUserID,
+    userID,
   };
-
 
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

@@ -1,35 +1,33 @@
 import './SignUpPage.css';
-import axios from 'axios';
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../context/AuthContext";
 import { Link, useNavigate} from 'react-router-dom';
+import { UserSignUp } from '../../apis';
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    
-    // console.log(data);
-
-    const url = `http://localhost:4200/signup`;
-
-    axios.post(url, data)
-    .then((res) => {
-      // console.log('Response : ',res.data);
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
-    }).catch((err) => {
-      console.log( "Error sign-up : ",err.response?.data?.error || "An error occurred");
-    });
+  const onSubmit = async (data) => {
+    console.log(`sign-up form data : `, data);
+    try {
+      const response = await UserSignUp(data);
+      if (response?.status === 200 || 201) {
+          console.log('Response : ',response.data);
+          navigate("/login");
+      } 
+    } catch (err) {
+      console.log(
+        "Error sign-up : ",
+        err.response?.data?.error || "An error occurred"
+      );
+    }
   };
 
   return (

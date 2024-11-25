@@ -3,30 +3,36 @@ import React from 'react'
 import './LoginPage.css'
 import { useForm } from 'react-hook-form';
 import { useAuthContext } from '../../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { UserLogin } from '../../apis';
 
 export const LoginPage = () => {
-    const {handleLogIn, setIsAuth } = useAuthContext();
-
+  const navigate = useNavigate();
+    const {setIsAuth, setUserID } = useAuthContext();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
-    // console.log('Login form data', data);
-    handleLogIn(data);
-
-    const url = `http://localhost:4200/login`;
-
-    axios.post(url, data)
-    .then((res) => {
-      // console.log(res.data);
-      if(res.status === 200 ){
+  const onSubmit = async (data) => {
+    // console.log(`Login form data : `,data);
+    try {
+      const res = await UserLogin(data);
+      if(res?.status === 200 || 201) {
+        const updatedData = {
+          ...data,
+          UserID: res.data.user._id, 
+        };
+        localStorage.setItem("user", JSON.stringify(updatedData));
+        console.log(`Response : `, res.data);
+        setUserID(res.data.user._id);
+        console.log('User ID : ',res.data.user._id);        
         setIsAuth(true);
-        // console.log('status 200');
+        console.log("Login Form data : ", data);
+        navigate("/");
+        // alert(`Logged In successfull`);
       }      
-    }).catch((err) => {
-      console.log('Error login : ', err.response?.data?.error || "An error occurred");
-    });
+    } catch (err) {
+      console.log(`Error login : `, err.response?.data?.error || 'An error occurred');            
+    }
   };
    
   return (
