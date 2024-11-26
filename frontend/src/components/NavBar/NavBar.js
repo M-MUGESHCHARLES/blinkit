@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@mui/material";
+import { Badge, Box, IconButton } from "@mui/material";
 import "./NavBar.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -8,6 +8,7 @@ import { CartButton } from "../CartButton/CartButton";
 import { useAuthContext } from "../../context/AuthContext";
 import { GetUserLocation } from "../../apis";
 import { CgProfile } from "react-icons/cg";
+import { useDataContext } from "../../context/context";
 
 export const NavBar = () => {
   const [locationData, setLocationData] = useState(null);
@@ -15,6 +16,7 @@ export const NavBar = () => {
   const [searchText, setSearchText] = useState('');
   
   const {isAuth,handleLogOut} = useAuthContext();
+  const {cartButtonBadge} = useDataContext();
 
   const handleClick = () => setIsEditing(true);
   const handleMouseLeave = () => {
@@ -136,7 +138,9 @@ export const NavBar = () => {
             </button>
           </div>
           <div className="ps-lg-3 mx-auto">
-            <CartButton />
+            <Badge color="error" badgeContent={cartButtonBadge}>
+              <CartButton />
+            </Badge>
           </div>
         </div>
       </nav>

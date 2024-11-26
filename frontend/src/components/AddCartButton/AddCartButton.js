@@ -1,54 +1,61 @@
 import { Button } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDataContext } from '../../context/context';
 import axios from 'axios';
 import { useAuthContext } from '../../context/AuthContext';
+import { UpdateCart } from '../../apis';
 
 export const AddCartButton = ({ ProductName, ProductID }) => {
   const [count, setCount] = useState(0);
 
-  const { cart, handleAddToCart } = useDataContext();
-  const{userID} = useAuthContext();
+  const { setCart, cart, handleCart } = useDataContext();
+  const { userID } = useAuthContext();
 
-  // -------------- Handle increment and Decrement
-const handleIncrement = () => {
-  setCount((prevCount) => prevCount + 1);
-};
-const handleDecrement = () => {
-  setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
-};
+  // Memoized handleAddToCart function
+  // const handleAddToCart = useCallback( async (action) => {
 
-  // Add to cart whenever count changes
-  useEffect(() => {
+  //     const data = {
+  //       userID,
+  //       ProductID,
+  //       action,
+  //     };
 
-    console.log("User ID ", userID);
+  //     try {
+  //       const res = await UpdateCart(data);
+  //       if(res?.status === 200 || 201 ) {
+  //         setCart(res.data.cart);
+  //         console.log(`Cart: ${JSON.stringify(res.data.cart, null, 2)}`);   
+  //         console.log('Cart data : ', cart);     
+  //       }
+  //     } catch (error) {
+  //       console.error(
+  //         "Error updating cart:",
+  //         error.response?.data?.error || "An error occurred"
+  //       );
+  //     }
+  //   }, [userID, ProductID] );
 
-    const NewData = {
-      userID,
-      item: {
-        ProductID,
-        ProductCount: count,
-      },
-    };
+  // Handlers for Add, Increment, and Decrement
 
-    if (count > 0) {
-      handleAddToCart({ProductID, count });
-      addToCart(NewData);
-    }
-  }, [count, handleAddToCart, ProductID]);
+  const handleIncrement = () => {
+    setCount((prevCount) => {
+      handleCart(ProductID, "increment"); 
+      return prevCount + 1;
+    });
+  };
 
-  const addToCart = (data) => {
-    axios
-      .put(`http://localhost:4200/add-to-cart`, data )
-      .then((response) => {
-        console.log("Updated user data:", response.data);
-      })
-      .catch((error) => {
-        console.error(
-          "Error adding to cart:",
-          error.response?.data?.error || "An error occurred"
-        );
-      });
+  const handleDecrement = () => {
+    setCount((prevCount) => {
+      if (prevCount > 0) {
+        handleCart(ProductID, "decrement"); 
+      }
+      return prevCount > 0 ? prevCount - 1 : 0;
+    });
+  };
+
+  const handleInitialAdd = () => {
+    setCount(1);
+    handleCart(ProductID, "add");
   };
 
   return (
@@ -58,7 +65,7 @@ const handleDecrement = () => {
       className="m-0 p-0 ms-auto"
     >
       {count === 0 ? (
-        <span className="py-2 w-100" onClick={handleIncrement}>
+        <span className="py-2 w-100" onClick={handleInitialAdd}>
           ADD
         </span>
       ) : (
@@ -83,3 +90,5 @@ const handleDecrement = () => {
     </Button>
   );
 };
+
+

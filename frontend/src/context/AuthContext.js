@@ -5,7 +5,9 @@ import { useDataContext } from "./context";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  
   const navigate = useNavigate();   
+
     const [isAuth, setIsAuth] = useState(() => {
         const storedUser = localStorage.getItem("user");
         return storedUser ? true : false;

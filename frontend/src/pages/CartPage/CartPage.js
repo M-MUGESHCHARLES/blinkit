@@ -7,13 +7,11 @@ import { ProductData } from "../../assets/Data/Data";
 import { RiEBike2Fill } from 'react-icons/ri';
 import { IoIosListBox } from 'react-icons/io';
 import { IoHandLeft } from 'react-icons/io5';
-import axios from 'axios';
+import empty_cart from '../../assets/Png/empty-cart.png'
 
 export default function CartPage() {
-  const { cart, handleRemoveProduct} =
-    useDataContext();
+  const { cart, setCartButtonBadge } = useDataContext();
   const [cartItems, setCartItems] = useState([]);
-
 
   useEffect(() => {
     // Match cart data with ProductData (locally stored data)
@@ -33,6 +31,10 @@ export default function CartPage() {
     // console.log('cart : ',cart);
   }, [cart]);
 
+  useEffect(() => {
+    setCartButtonBadge(cartItems.length);
+  }, [cartItems]);
+  
 
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.Count,
@@ -64,13 +66,17 @@ export default function CartPage() {
             <CartPageProductDetail
               key={index}
               item={item}
-              handleRemoveProduct={handleRemoveProduct}
             />
           ))
         ) : (
-          <p className="mx-auto fw-bold text-danger my-5 text-center">
-            Your Cart is Empty
-          </p>
+          <div className='empty-cart m-0 p-0 my-4'>
+             <div className='container m-0 py-3 text-center'>
+                <img src={empty_cart} alt='empty-cart' height='auto' width='60%'/>
+             </div>
+            <p className="mx-auto fw-bold text-danger mb-5 text-center">
+              Your Cart is Empty
+            </p>
+          </div>
         )}
 
         <div className="bill-details mt-3 px-4 py-3  rounded-3">
@@ -123,7 +129,30 @@ export default function CartPage() {
 
 
 // product item details component 
-const CartPageProductDetail = ({ item, handleRemoveProduct}) => {
+const CartPageProductDetail = ({ item}) => {
+  const [count, setCount] =useState(item.count);
+  const {handleCart} = useDataContext();
+
+  const handleIncrement = () => {
+    setCount((prevCount) => {
+      handleCart(item.id, "increment");
+      return prevCount + 1;
+    });
+  };
+
+  const handleDecrement = () => {
+    setCount((prevCount) => {
+        handleCart(item.id, "decrement");
+      return prevCount > 0 ? prevCount - 1 : 0;
+    });
+  };
+
+  const handleRemove = () => {
+    handleCart(item.id, 'remove');
+  };
+
+
+
   return (
     <div className="item-details d-flex align-items-center border border-end-0 border-top-0 pe-1 py-1 rounded-4 mt-3 shadow-sm">
       <div className="item-image col-2">
@@ -140,17 +169,17 @@ const CartPageProductDetail = ({ item, handleRemoveProduct}) => {
         <p className="m-0 mb-1 text-truncate fw-semibold">{item.name}</p>
         <p className="m-0 mb-1 text-muted">{item.weight}</p>
         <p className="m-0 mb-1 fw-semibold">
-          ₹{item.price} &nbsp; * <span className='fw-light'>{item.Count}</span>
+          ₹{item.price} &nbsp; * <span className="fw-light">{item.Count}</span>
         </p>
       </div>
 
       <div className="d-flex flex-column gap-3 col-2">
-        {/* <Button variant="contained" color="success" className="m-0 p-0 ms-auto">
+        <Button variant="contained" color="success" className="m-0 p-0 ms-auto">
           <div className="d-flex align-items-center w-100">
             <span
               style={{ cursor: "pointer", minWidth: "fit-content" }}
               className="p-0 m-0 py-2 px-2 h-100 w-auto"
-              // onClick={handleDecrement}
+              onClick={handleDecrement}
             >
               -
             </span>
@@ -158,16 +187,17 @@ const CartPageProductDetail = ({ item, handleRemoveProduct}) => {
             <span
               style={{ cursor: "pointer", minWidth: "fit-content" }}
               className=" p-0 m-0 py-2 px-2 h-10 w-auto"
-              // onClick={handleIncrement}
+              onClick={handleIncrement}
             >
               +
             </span>
           </div>
-        </Button> */}
+        </Button>
 
         <div className="text-center">
-          <IconButton className="text-danger mx-auto"
-          onClick={() => handleRemoveProduct(item.id)}
+          <IconButton
+            className="text-danger mx-auto"
+            onClick={handleRemove}
           >
             <MdDelete />
           </IconButton>

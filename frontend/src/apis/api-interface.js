@@ -14,3 +14,7 @@ export const POSTUserSignUpApi = (path, data) => {
 export const POSTUserLoginApi = (path, data) => {
     return axios.post(API_Base_Url + path, data);
 }
+
+export const UpdateCartApi = (path, data) => {
+    return axios.put(API_Base_Url + path, data );
+};
