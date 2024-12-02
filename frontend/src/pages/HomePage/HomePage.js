@@ -10,7 +10,7 @@ import { useDataContext } from "../../context/context";
 import { BannerData, ProductsDisplay, ProductData } from "../../assets/Data/Data";
 
 export const HomePage = () => {
-  const { viewedProduct } = useDataContext();
+  const { viewedProduct, products } = useDataContext();
   const [recentlyViewed, setRecentlyViewed] = useState([]);
   // console.log(`viewed product data : ${JSON.stringify(viewedProduct)} `);
 
@@ -19,9 +19,8 @@ export const HomePage = () => {
   }, [viewedProduct]);
 
   // Filter and sort products based on recently viewed order
-
-  const filteredProducts = ProductData.filter((P) =>
-    recentlyViewed.slice(-6).some((item) => item.id === P.id)
+  const filteredProducts = products.filter((P) =>
+    recentlyViewed.slice(-6).some((item) => item.id === P._id)
   ).sort(
     (a, b) =>
       recentlyViewed.findIndex((item) => item.id === b.id) -
@@ -79,13 +78,13 @@ export const HomePage = () => {
           </div>
 
           <div id="Products" className="row m-0 py-2">
-            {ProductData.filter((P) => P.category === "Dairy").map(
-              (P, index) => (
+            {products
+              .filter((P) => P.category === "Dairy")
+              .map((P, index) => (
                 <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
                   <ProductCardComponent Data={P} />
                 </div>
-              )
-            )}
+              ))}
           </div>
         </section>
         {/* Snack category products display section */}
@@ -98,13 +97,13 @@ export const HomePage = () => {
           </div>
 
           <div id="Products" className="row m-0 py-2">
-            {ProductData.filter((P) => P.category === "Snack").map(
-              (P, index) => (
+            {products
+              .filter((P) => P.category === "Snack")
+              .map((P, index) => (
                 <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
                   <ProductCardComponent Data={P} />
                 </div>
-              )
-            )}
+              ))}
           </div>
         </section>
         {/* Recently viewed products section */}

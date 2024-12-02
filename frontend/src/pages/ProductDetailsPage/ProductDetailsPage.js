@@ -8,15 +8,34 @@ import ProductCardComponent from '../../components/ProductCardComponent/ProductC
 
 export default function ProductDetailsPage() {
     const {productID} = useParams();
-    const {} = useDataContext();
+    const { products } = useDataContext();
 
-    const Details = ProductData.find(
-        (P) => P.id === Number(productID)
-    );
+    const Details = products.find((P) => P._id === Number(productID));
 
     if (!Details) {
       return <NotFoundPage />; // Redirect to 404 Page
     };
+
+    const Offers = [
+      {
+        icon: "🚀",
+        title: "Superfast Delivery",
+        description:
+          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
+      },
+      {
+        icon: "💸",
+        title: "Best Prices & Offers",
+        description:
+          "Best price destination with offers directly from the manufacturers.",
+      },
+      {
+        icon: "📦",
+        title: "Wide Assortment",
+        description:
+          "Choose from 5000+ products across food, personal care, household & other categories.",
+      },
+    ];
 
   return (
     <>
@@ -118,7 +137,7 @@ export default function ProductDetailsPage() {
             {/* Why Shop Section */}
             <h3 className="h6 mt-4">Why shop from us?</h3>
             <div className="d-flex flex-column gap-3">
-              {Details.offers.map((offer, index) => (
+              {Offers.map((offer, index) => (
                 <div key={index} className="d-flex align-items-start gap-2">
                   <span className="fs-4">{offer.icon}</span>
                   <div>
@@ -145,20 +164,20 @@ export default function ProductDetailsPage() {
           id="Products"
           className="d-flex justify-content-evenly m-0 overflow-y-hidden px-3 py-2"
         >
-          {ProductData.filter(
-            (P) => P.category === Details.category && P.name !== Details.name
-          ).map((P, index) => (
-            <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
-              <ProductCardComponent Data={P} />
-            </div>
-          ))}
+          {products
+            .filter(
+              (P) => P.category === Details.category && P.name !== Details.name
+            )
+            .map((P, index) => (
+              <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
+                <ProductCardComponent Data={P} />
+              </div>
+            ))}
         </div>
       </section>
 
       {/* Recently Viewed Products section */}
-      <section className=''>
-
-      </section>
+      <section className=""></section>
     </>
   );
 };

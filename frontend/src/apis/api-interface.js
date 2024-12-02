@@ -18,3 +18,7 @@ export const POSTUserLoginApi = (path, data) => {
 export const UpdateCartApi = (path, data) => {
     return axios.put(API_Base_Url + path, data );
 };
+
+export const ProductsDataApi = (path, data) => {
+    return axios.get(API_Base_Url + path, data);
+};

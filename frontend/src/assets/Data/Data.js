@@ -78,26 +78,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Amul",
     category: "Dairy",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 2,
@@ -110,26 +90,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Amul",
     category: "Dairy",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 3,
@@ -142,26 +102,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Amul",
     category: "Dairy",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 4,
@@ -174,26 +114,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Amul",
     category: "Dairy",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 5,
@@ -206,26 +126,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Amul",
     category: "Dairy",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 6,
@@ -238,26 +138,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Amul",
     category: "Dairy",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 7,
@@ -270,26 +150,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Kettle Studio",
     category: "Snack",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 8,
@@ -302,26 +162,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Orion",
     category: "Snack",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 9,
@@ -334,26 +174,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Cheetos",
     category: "Snack",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 10,
@@ -366,26 +186,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Kettle Studio",
     category: "Snack",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 11,
@@ -398,26 +198,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Orion",
     category: "Snack",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
   {
     id: 12,
@@ -430,26 +210,6 @@ export const ProductData = [
     description: "Inclusive of all taxes",
     brand: "Orion",
     category: "Snack",
-    offers: [
-      {
-        icon: "🚀",
-        title: "Superfast Delivery",
-        description:
-          "Get your order delivered to your doorstep at the earliest from dark stores near you.",
-      },
-      {
-        icon: "💸",
-        title: "Best Prices & Offers",
-        description:
-          "Best price destination with offers directly from the manufacturers.",
-      },
-      {
-        icon: "📦",
-        title: "Wide Assortment",
-        description:
-          "Choose from 5000+ products across food, personal care, household & other categories.",
-      },
-    ],
   },
 ];
 

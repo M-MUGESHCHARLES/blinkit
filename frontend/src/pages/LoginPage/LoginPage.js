@@ -26,12 +26,12 @@ export const LoginPage = () => {
         localStorage.setItem("user", JSON.stringify(updatedData));
         // console.log(`Response : `, res.data);
         setUserID(res.data.user._id);
-        console.log("User ID : ", res.data.user._id);
+        // console.log("User ID : ", res.data.user._id);
         // Set the cart with data from the response
         if (res.data.user.cart) {
           setCart(res.data.user.cart);
             // localStorage.setItem("cart", JSON.stringify(res.data.user.cart));
-          console.log("Cart initialized: ", res.data.user.cart);
+          // console.log("Cart initialized: ", res.data.user.cart);
         }
         setIsAuth(true);
         // console.log("Login Form data : ", data);

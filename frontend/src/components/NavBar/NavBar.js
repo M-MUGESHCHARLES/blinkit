@@ -113,14 +113,16 @@ export const NavBar = () => {
                   width: "100%",
                 }}
               >
-                <input
-                  type="text"
-                  className="border border-0 px-2 search_input"
-                  placeholder="Search"
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
-                  onBlur={handleBlur}
-                />
+                <form>
+                  <input
+                    type="text"
+                    className="border border-0 px-2 search_input"
+                    placeholder="Search"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                    onBlur={handleBlur}
+                  />
+                </form>
               </Box>
             ) : (
               <PlaceHolder PlaceHolder={placeholders} />
@@ -138,7 +140,7 @@ export const NavBar = () => {
             </button>
           </div>
           <div className="ps-lg-3 mx-auto">
-            <Badge color="error" badgeContent={cartButtonBadge}>
+            <Badge sx={{fontWeight: 'bold'}} color="error" badgeContent={cartButtonBadge}>
               <CartButton />
             </Badge>
           </div>

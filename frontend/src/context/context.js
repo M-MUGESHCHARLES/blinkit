@@ -7,23 +7,15 @@ import React, {
   useEffect,
 } from "react";
 import { useAuthContext } from "./AuthContext";
-import { UpdateCart } from "../apis";
+import { ProductsData, UpdateCart } from "../apis";
 
 const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
 
-  // const [cart, setCart] = useState(
-  //   JSON.parse(
-  //     localStorage.getItem("cart") ? localStorage.getItem("cart") : "[]"
-  //   )
-  // );
-
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartButtonBadge, setCartButtonBadge] = useState(0);
-
-  const {userID} = useAuthContext();
-
   const [viewedProduct, setViewedProduct] = useState(
     JSON.parse(
       localStorage.getItem("viewedProducts")
@@ -32,24 +24,31 @@ export const DataProvider = ({ children }) => {
     )
   );
 
+  const {userID} = useAuthContext();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await ProductsData();
+        if (res.status === 200 || res.status === 201) {
+          setProducts(res.data);
+        }
+      } catch (error) {
+        console.error(
+          "Error fetching products data :",
+          error.response?.data?.error || "An error occurred"
+        );
+      }
+    };
+    fetchProducts();
+  },[]);
+
+  // console.log('Products : ', products);
+
   useEffect(() => {
     localStorage.setItem("viewedProducts", JSON.stringify(viewedProduct));
     // console.log(`Viewed product : ${JSON.stringify(viewedProduct)}`);
   }, [viewedProduct]);
-
-  // useEffect(() => {
-  //   localStorage.setItem("cart", JSON.stringify(cart));
-  //   console.log(`Cart 1 : ${JSON.stringify(cart)}`);
-  // }, [cart]);
-
-  const handleRemoveProduct = (Id) => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const updatedCart = storedCart.filter((item) => item.ProductID !== Id);
-    // console.log("Before removing product:", storedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    // console.log("After removing product:", updatedCart);
-    setCart(updatedCart);
-  };
 
   // RecentlyViewedProduct function
   const handleViewedProduct = (Data) => {
@@ -80,13 +79,13 @@ export const DataProvider = ({ children }) => {
         action,
       };
 
-      console.log('product id : ', ProductID);      
+      // console.log('product id : ', ProductID);      
 
       try {
         const res = await UpdateCart(data);
         if (res?.status === 200 || 201) {
           setCart(res.data.cart);
-          console.log(`Cart: ${JSON.stringify(res.data.cart, null, 2)}`);
+          // console.log(`Cart: ${JSON.stringify(res.data.cart, null, 2)}`);
         }
       } catch (error) {
         console.error(
@@ -99,13 +98,13 @@ export const DataProvider = ({ children }) => {
   );
 
   const contextValue = {
+    products,
     setCart,
     cart,
     handleCart,
     viewedProduct,
     setViewedProduct,
     handleViewedProduct,
-    handleRemoveProduct,
     cartButtonBadge,
     setCartButtonBadge,
   };

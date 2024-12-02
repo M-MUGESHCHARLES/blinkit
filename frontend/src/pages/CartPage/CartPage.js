@@ -10,14 +10,14 @@ import { IoHandLeft } from 'react-icons/io5';
 import empty_cart from '../../assets/Png/empty-cart.png'
 
 export default function CartPage() {
-  const { cart, setCartButtonBadge } = useDataContext();
+  const { cart, setCartButtonBadge, products } = useDataContext();
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     // Match cart data with ProductData (locally stored data)
     const enrichedCartItems = cart.map((cartItem) => {
-      const matchedProduct = ProductData.find(
-        (product) => product.id === cartItem.ProductID
+      const matchedProduct = products.find(
+        (product) => product._id === cartItem.ProductID
       );
       return matchedProduct
         ? {
@@ -29,7 +29,7 @@ export default function CartPage() {
     setCartItems(enrichedCartItems);
     // console.log('cart items : ' ,cartItems);
     // console.log('cart : ',cart);
-  }, [cart]);
+  }, [cart,products]);
 
   useEffect(() => {
     setCartButtonBadge(cartItems.length);
@@ -135,21 +135,25 @@ const CartPageProductDetail = ({ item}) => {
 
   const handleIncrement = () => {
     setCount((prevCount) => {
-      handleCart(item.id, "increment");
+      handleCart(item._id, "increment");
       return prevCount + 1;
     });
   };
 
   const handleDecrement = () => {
     setCount((prevCount) => {
-        handleCart(item.id, "decrement");
+        handleCart(item._id, "decrement");
       return prevCount > 0 ? prevCount - 1 : 0;
     });
   };
 
   const handleRemove = () => {
-    handleCart(item.id, 'remove');
+    handleCart(item._id, 'remove');
   };
+
+      const CartProduct = ProductData.find((P) => {
+        return item._id === P.id;
+      });  
 
 
 
@@ -158,7 +162,7 @@ const CartPageProductDetail = ({ item}) => {
       <div className="item-image col-2">
         <img
           className="img-fluid"
-          src={item.img}
+          src={CartProduct.img}
           alt="product"
           height="auto"
           width="100%"

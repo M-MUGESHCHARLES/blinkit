@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require('cors');
 const connectDB = require('./db/connection');
 const userRoutes = require('./controller/Users');
+const productsRoute = require('./controller/Products');
 
 const app = express();
 const port = 4200;
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Routes-------------------------//
 app.use('/', userRoutes);
+app.use('/products', productsRoute);
 
 // Home route---------------------//
 app.get("/", (req, res) => {

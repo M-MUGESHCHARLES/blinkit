@@ -9,8 +9,10 @@ import { PublicRoute } from "./PublicRoute";
 import { Layout } from "../pages/Layout";
 import NotFoundPage from "../pages/404/NotFoundPage";
 import { SignUpPage } from "../pages/SignUpPage/SignUpPage";
+import { useDataContext } from "../context/context";
 
 export const MainRouter = () => {
+  const {products} = useDataContext();
   return (
     <>
       <Routes>
@@ -30,7 +32,7 @@ export const MainRouter = () => {
             element={
               <PublicRoute>
                 <SignUpPage />
-              </PublicRoute> 
+              </PublicRoute>
             }
           />
 
