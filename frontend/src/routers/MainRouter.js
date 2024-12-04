@@ -10,6 +10,8 @@ import { Layout } from "../pages/Layout";
 import NotFoundPage from "../pages/404/NotFoundPage";
 import { SignUpPage } from "../pages/SignUpPage/SignUpPage";
 import { useDataContext } from "../context/context";
+import { FilterPage } from "../pages/FilterPage/FilterPage";
+import { CategoryPage } from "../pages/CategoryPage/CategoryPage";
 
 export const MainRouter = () => {
   const {products} = useDataContext();
@@ -46,11 +48,29 @@ export const MainRouter = () => {
             }
           />
 
+          <Route 
+            path="/:category"
+            element={
+              <PrivateRoute>
+                <CategoryPage/>
+              </PrivateRoute>
+            }
+          />
+
           <Route
             path="/:category/:productID"
             element={
               <PrivateRoute>
                 <ProductDetailsPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route 
+            path='/products'
+            element={
+              <PrivateRoute>
+                <FilterPage/>
               </PrivateRoute>
             }
           />

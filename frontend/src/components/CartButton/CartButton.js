@@ -14,7 +14,7 @@ export const CartButton = () => {
         <span>
           <MdOutlineShoppingCart size={24} />
         </span>
-        <span className="ps-1" id="My-cart">Cart</span>
+        {/* <span className="ps-1" id="My-cart">Cart</span> */}
       </button>
 
       <div

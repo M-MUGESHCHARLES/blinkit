@@ -8,12 +8,15 @@ export const AuthProvider = ({ children }) => {
   
   const navigate = useNavigate();   
 
+    // const [isAuth, setIsAuth] = useState(true);
+
     const [isAuth, setIsAuth] = useState(() => {
         const storedUser = localStorage.getItem("user");
         return storedUser ? true : false;
     });    //// using localstorage by Check whether 'user' data exists in localStorage or not  
 
     const [userID, setUserID] = useState(null);
+
     useEffect(() => {
       const storedUser = JSON.parse(localStorage.getItem("user"));
       if (storedUser && storedUser.UserID) {

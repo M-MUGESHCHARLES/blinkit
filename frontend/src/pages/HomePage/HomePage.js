@@ -8,8 +8,10 @@ import {NavBar } from '../../components/NavBar/NavBar'
 import ProductCardComponent from "../../components/ProductCardComponent/ProductCardComponent";
 import { useDataContext } from "../../context/context";
 import { BannerData, ProductsDisplay, ProductData } from "../../assets/Data/Data";
+import { Link } from "react-router-dom";
 
 export const HomePage = () => {
+
   const { viewedProduct, products } = useDataContext();
   const [recentlyViewed, setRecentlyViewed] = useState([]);
   // console.log(`viewed product data : ${JSON.stringify(viewedProduct)} `);
@@ -33,6 +35,7 @@ export const HomePage = () => {
   return (
     <>
       <NavBar />
+
       <main id="Home_Page">
         {/* banner section */}
         <section id="Banner" className="">
@@ -68,13 +71,16 @@ export const HomePage = () => {
             ))}
           </div>
         </section>
+
         {/* Dairy category products display section */}
         <section className="px-0 px-md-2 px-lg-3 py-3">
           <div className="d-flex justify-content-between px-3 pb-1">
             <h5 className="fw-semibold d-inline-block m-0">
               Dairy, Breads & Eggs
             </h5>
-            <h6 className="text-success my-auto m-0">see all</h6>
+            <Link to="/Dairy" className="text-decoration-none">
+              <h6 className="text-success my-auto m-0">see all</h6>
+            </Link>
           </div>
 
           <div id="Products" className="row m-0 py-2">
@@ -87,13 +93,16 @@ export const HomePage = () => {
               ))}
           </div>
         </section>
+
         {/* Snack category products display section */}
         <section className="px-0 px-md-2 px-lg-3 py-3">
           <div className="d-flex justify-content-between px-3 pb-1">
             <h5 className="fw-semibold d-inline-block m-0">
               Snacks & Munchies
             </h5>
-            <h6 className="text-success my-auto m-0">see all</h6>
+            <Link to="/Snack" className="text-decoration-none">
+              <h6 className="text-success my-auto m-0">see all</h6>
+            </Link>
           </div>
 
           <div id="Products" className="row m-0 py-2">
@@ -106,6 +115,7 @@ export const HomePage = () => {
               ))}
           </div>
         </section>
+
         {/* Recently viewed products section */}
         {filteredProducts.length > 4 && (
           <section className="px-0 px-md-2 px-lg-3 py-3">

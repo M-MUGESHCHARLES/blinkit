@@ -13,7 +13,14 @@ const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
 
+  // Navbar search box ---
+  const [isEditing, setIsEditing] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
+  // Products fetched from backend without img
   const [products, setProducts] = useState([]);
+
+  // Cart
   const [cart, setCart] = useState([]);
   const [cartButtonBadge, setCartButtonBadge] = useState(0);
   const [viewedProduct, setViewedProduct] = useState(
@@ -107,6 +114,10 @@ export const DataProvider = ({ children }) => {
     handleViewedProduct,
     cartButtonBadge,
     setCartButtonBadge,
+    isEditing,
+    setIsEditing,
+    searchText,
+    setSearchText,
   };
 
   return (

@@ -12,6 +12,10 @@ export default function ProductDetailsPage() {
 
     const Details = products.find((P) => P._id === Number(productID));
 
+    const DetailsProduct = ProductData.find((P) => {
+      return Details._id === P.id;
+    }); 
+
     if (!Details) {
       return <NotFoundPage />; // Redirect to 404 Page
     };
@@ -42,11 +46,15 @@ export default function ProductDetailsPage() {
       <div className="container mt-5 mb-3">
         <div className="row">
           {/* Bread crumbs */}
-          <nav className="text-muted fw-semibold mb-4">
+          <nav className=" fw-semibold mb-4">
             <Link to="/" className="text-decoration-none text-muted">
               Home
             </Link>
-            / {Details.category} /
+            / 
+            <Link to={`/${Details.category}`} className='text-decoration-none text-muted'>
+              {Details.category}
+            </Link> 
+            /
             <span className="fw-bold" id="color-G">
               {Details.name}
             </span>
@@ -57,7 +65,7 @@ export default function ProductDetailsPage() {
           {/* Product Image Section */}
           <div className="col-md-5 d-flex flex-column m-0 align-content-around text-center">
             <img
-              src={Details.img}
+              src={DetailsProduct.img}
               alt="product"
               className="img-fluid mb-3 col-12"
             />
@@ -65,7 +73,7 @@ export default function ProductDetailsPage() {
             <div className="d-flex px-2">
               <div className="p-2">
                 <img
-                  src={Details.img}
+                  src={DetailsProduct.img}
                   alt="product"
                   height="auto"
                   width="25%"
@@ -74,7 +82,7 @@ export default function ProductDetailsPage() {
               </div>
               <div className="p-2">
                 <img
-                  src={Details.img}
+                  src={DetailsProduct.img}
                   alt="product"
                   height="auto"
                   width="25%"
@@ -83,7 +91,7 @@ export default function ProductDetailsPage() {
               </div>
               <div className="p-2">
                 <img
-                  src={Details.img}
+                  src={DetailsProduct.img}
                   alt="product"
                   height="auto"
                   width="25%"
@@ -92,16 +100,7 @@ export default function ProductDetailsPage() {
               </div>
               <div className="p-2">
                 <img
-                  src={Details.img}
-                  alt="product"
-                  height="auto"
-                  width="25%"
-                  className="img-fluid mb-3 col-12"
-                />
-              </div>
-              <div className="p-2">
-                <img
-                  src={Details.img}
+                  src={DetailsProduct.img}
                   alt="product"
                   height="auto"
                   width="25%"

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UserSchema = require("../model/UserSchema");
+const ProductSchema = require("../model/ProductSchema");
 
 // create new user .
 router.post("/signup", async (req, res) => {
@@ -102,5 +103,24 @@ router.put("/update-cart", async (req, res) => {
     res.status(500).send({ error: "Failed to update cart" });
   }
 });
+
+router.get("/products", async (req, res) => {
+  const searchText = req.query.search || "";
+  try {
+    const searchedProducts = await ProductSchema.find({
+      $or: [
+        { name: { $regex: searchText, $options: "i" } },
+        { brand: { $regex: searchText, $options: "i" } },
+        { category: { $regex: searchText, $options: "i" } },
+      ],
+    });
+
+    res.status(200).send(searchedProducts);
+  } catch (err) {
+    console.error("Error searching products: ", err);
+    res.status(500).send({ message: err.message });
+  }
+});
+
 
 module.exports = router;

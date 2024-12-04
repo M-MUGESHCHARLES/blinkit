@@ -22,3 +22,7 @@ export const UpdateCartApi = (path, data) => {
 export const ProductsDataApi = (path, data) => {
     return axios.get(API_Base_Url + path, data);
 };
+
+export const SearchedProductsApi = (path) => {
+    return axios.get(API_Base_Url + path);
+};

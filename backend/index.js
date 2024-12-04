@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Routes-------------------------//
 app.use('/', userRoutes);
-app.use('/products', productsRoute);
+app.use('/allproducts', productsRoute);
 
 // Home route---------------------//
 app.get("/", (req, res) => {

@@ -9,23 +9,58 @@ import { useAuthContext } from "../../context/AuthContext";
 import { GetUserLocation } from "../../apis";
 import { CgProfile } from "react-icons/cg";
 import { useDataContext } from "../../context/context";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
   const [locationData, setLocationData] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [searchText, setSearchText] = useState('');
+  const [isFilterPage, setIsFilterPage] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
   
   const {isAuth,handleLogOut} = useAuthContext();
-  const {cartButtonBadge} = useDataContext();
+  const {cartButtonBadge, isEditing, setIsEditing, searchText, setSearchText} = useDataContext();
 
-  const handleClick = () => setIsEditing(true);
+  const handleClick = () => {
+    setIsEditing(true);
+    navigate('/products?search');
+  };
+
   const handleMouseLeave = () => {
-    if (searchText === "") setIsEditing(false);
+    if (searchText === "") {
+      setIsEditing(false);
+      // setIsFilterPage(false);
+    }
   };
 
   const handleBlur = () => {
-    if (searchText === "") setIsEditing(false);
+    if (searchText === "") {
+      setIsEditing(false);
+      setIsFilterPage(false);
+    }
   };
+
+  const handleInputChange = (e) => {
+    const query = e.target.value;
+    setSearchText(query);
+    navigate(`/products?search=${encodeURIComponent(query)}`); 
+  };
+
+  const handleBack = () => {
+    navigate('/');
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/products?search=${encodeURIComponent(searchText)}`);
+  };
+
+  useEffect(() => {
+    if (location.pathname === "/products") {
+      setIsFilterPage(true);
+    } else {
+      setIsFilterPage(false); 
+    }
+  }, [location.pathname]);
 
   const placeholders = [
     `Search "paneer"`,
@@ -64,10 +99,12 @@ export const NavBar = () => {
       <nav className="navbar row m-0 p-0 py-4">
         <div className="col-12 col-lg-5 col-xl-4 d-flex ">
           <div className="px-md-2">
-            <h2 className=" Logo m-0 d-inline ps-md-3 m-0">
-              <span id="color-Y">blink</span>
-              <span id="color-G">it</span>
-            </h2>
+            <Link to="/" className="text-decoration-none">
+              <h2 className=" Logo m-0 d-inline ps-md-3 m-0">
+                <span id="color-Y">blink</span>
+                <span id="color-G">it</span>
+              </h2>
+            </Link>
           </div>
 
           <div className="ps-md-4 d-flex flex-column px-2 justify-content-center">
@@ -99,7 +136,6 @@ export const NavBar = () => {
           <div
             className="d-flex search-container border border-1 rounded-3 px-2 overflow-hidden"
             onClick={handleClick}
-            onMouseOver={handleClick}
             onMouseLeave={handleMouseLeave}
           >
             <div className="px-1 my-auto">
@@ -113,13 +149,13 @@ export const NavBar = () => {
                   width: "100%",
                 }}
               >
-                <form>
+                <form onSubmit={handleSubmit}>
                   <input
                     type="text"
                     className="border border-0 px-2 search_input"
-                    placeholder="Search"
+                    placeholder="Search Product"
                     value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
+                    onChange={handleInputChange}
                     onBlur={handleBlur}
                   />
                 </form>
@@ -131,19 +167,47 @@ export const NavBar = () => {
         </div>
 
         <div
-          className="d-flex col-lg-2 pt-3 pt-lg-0"
+          className="d-flex col-lg-2 pt-3 pt-lg-0 gap-2"
           id="Cart_Button_sm_screen"
         >
-          <div className="d-none d-lg-block align-content-around">
-            <button className="btn btn-light border-0" onClick={handleLogOut}>
-              {isAuth ? "LogOut" : "LogIn"}
-            </button>
-          </div>
-          <div className="ps-lg-3 mx-auto">
-            <Badge sx={{fontWeight: 'bold'}} color="error" badgeContent={cartButtonBadge}>
-              <CartButton />
-            </Badge>
-          </div>
+          {isFilterPage ? (
+            <div>
+              <button
+                className="btn btn-outline-secondary"
+                onClick={handleBack}
+              >
+                Back
+              </button>
+            </div>
+          ) : (
+            <div className="d-none d-lg-block align-content-around">
+              <button className="btn btn-light border-0" onClick={handleLogOut}>
+                {isAuth ? "LogOut" : "LogIn"}
+              </button>
+            </div>
+          )}
+
+          {isFilterPage ? (
+            <div className="ps-lg-3 d-none d-md-block mx-auto">
+              <Badge
+                sx={{ fontWeight: "bold" }}
+                color="error"
+                badgeContent={cartButtonBadge}
+              >
+                <CartButton/>
+              </Badge>
+            </div>
+          ) : (
+            <div className="ps-lg-3 mx-auto">
+              <Badge
+                sx={{ fontWeight: "bold" }}
+                color="error"
+                badgeContent={cartButtonBadge}
+              >
+                <CartButton/>
+              </Badge>
+            </div>
+          )}
         </div>
       </nav>
     </header>

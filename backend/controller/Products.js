@@ -13,24 +13,5 @@ router.get('/', async(req, res) => {
     }
 });
 
-router.get("/search", async (req, res) => {
-  const searchText = req.query.q || ""; 
-  try {
-    const searchedProducts = await ProductSchema.find({
-      $or: [
-        { name: { $regex: searchText, $options: "i" } }, 
-        { category: { $regex: searchText, $options: "i" } }, 
-        { description: { $regex: searchText, $options: "i" } }, 
-      ],
-    });
-
-    res.status(200).send(searchedProducts);
-  } catch (err) {
-    console.error("Error searching products: ", err);
-    res.status(500).send({ message: err.message });
-  }
-});
-
-
 
 module.exports = router;
