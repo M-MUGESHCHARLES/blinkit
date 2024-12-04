@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// update product count in the cart.
+// update cart & product count in the cart.
 router.put("/update-cart", async (req, res) => {
   try {
     const { userID, ProductID, action } = req.body;
@@ -55,20 +55,26 @@ router.put("/update-cart", async (req, res) => {
       (item) => item.ProductID === ProductID
     );
 
+    let ResponseMessage = '';
+
     if (action === "add") {
       // Add product to cart or increment its count
       if (productIndex === -1) {
         user.cart.push({ ProductID, Count: 1 });
+        ResponseMessage = 'Product Added to Cart';
       } else {
         user.cart[productIndex].Count += 1;
+        ResponseMessage = 'Product count incremented!';
       }
 
     } else if (action === "increment") {
       // Increment product count
       if (productIndex !== -1) {
         user.cart[productIndex].Count += 1;
+        ResponseMessage = "Product count increased!";
       } else {
-        return res.status(400).send({ error: "Product not found in cart" });
+        user.cart.push({ ProductID, Count: 1 });
+        ResponseMessage = "Product added to cart!";
       }
 
     } else if (action === "decrement") {
@@ -76,8 +82,10 @@ router.put("/update-cart", async (req, res) => {
       if (productIndex !== -1) {
         if (user.cart[productIndex].Count > 1) {
           user.cart[productIndex].Count -= 1;
+          ResponseMessage = "Product count decreased!";
         } else {
           user.cart.splice(productIndex, 1);
+          ResponseMessage = "Product removed from cart!";
         }
       } else {
         return res.status(400).send({ error: "Product not found in cart" });
@@ -87,6 +95,7 @@ router.put("/update-cart", async (req, res) => {
         // Remove product from cart
         if (productIndex !== -1) {
             user.cart.splice(productIndex, 1);
+            ResponseMessage = "Product removed from cart!";
         } else {
             return res.status(400).send({ error: "Product not found in cart" });
         }
@@ -96,7 +105,7 @@ router.put("/update-cart", async (req, res) => {
     }
     
     await user.save();
-    res.status(200).send(user);
+    res.status(200).send({ResponseMessage, user});
 
   } catch (error) {
     console.error("Error updating cart:", error);
@@ -104,6 +113,7 @@ router.put("/update-cart", async (req, res) => {
   }
 });
 
+// To get the stored products
 router.get("/products", async (req, res) => {
   const searchText = req.query.search || "";
   try {
@@ -119,6 +129,20 @@ router.get("/products", async (req, res) => {
   } catch (err) {
     console.error("Error searching products: ", err);
     res.status(500).send({ message: err.message });
+  }
+});
+
+// To get the users data.
+router.get("/api/user/:userID", async (req, res) => {
+  const { userID } = req.params;
+  try {
+    const user = await UserSchema.findById(userID); 
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.status(200).send({user});
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

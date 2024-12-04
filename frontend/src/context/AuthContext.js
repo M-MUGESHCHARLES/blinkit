@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDataContext } from "./context";
+import { UserData } from "../apis";
 
 const AuthContext = createContext();
 
@@ -8,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   
   const navigate = useNavigate();   
 
-    // const [isAuth, setIsAuth] = useState(true);
+    // const [isAuth, setIsAuth] = useState(true);  //// created for testing
 
     const [isAuth, setIsAuth] = useState(() => {
         const storedUser = localStorage.getItem("user");
@@ -35,7 +36,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     console.log("User logged in ? ", isAuth);  //// to verify the state after the user log-in
-  }, [isAuth]);
+  }, [isAuth]);  
 
   const contextValue = {
     isAuth,

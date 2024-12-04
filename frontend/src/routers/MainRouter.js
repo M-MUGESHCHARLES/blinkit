@@ -9,12 +9,11 @@ import { PublicRoute } from "./PublicRoute";
 import { Layout } from "../pages/Layout";
 import NotFoundPage from "../pages/404/NotFoundPage";
 import { SignUpPage } from "../pages/SignUpPage/SignUpPage";
-import { useDataContext } from "../context/context";
 import { FilterPage } from "../pages/FilterPage/FilterPage";
 import { CategoryPage } from "../pages/CategoryPage/CategoryPage";
+import { ToastContainer, Bounce } from "react-toastify";
 
 export const MainRouter = () => {
-  const {products} = useDataContext();
   return (
     <>
       <Routes>
@@ -48,11 +47,11 @@ export const MainRouter = () => {
             }
           />
 
-          <Route 
+          <Route
             path="/:category"
             element={
               <PrivateRoute>
-                <CategoryPage/>
+                <CategoryPage />
               </PrivateRoute>
             }
           />
@@ -66,11 +65,11 @@ export const MainRouter = () => {
             }
           />
 
-          <Route 
-            path='/products'
+          <Route
+            path="/products"
             element={
               <PrivateRoute>
-                <FilterPage/>
+                <FilterPage />
               </PrivateRoute>
             }
           />
@@ -79,6 +78,23 @@ export const MainRouter = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
+
+      {/* Toast messager  */}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        limit={3}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce} 
+      />
+
     </>
   );
 };

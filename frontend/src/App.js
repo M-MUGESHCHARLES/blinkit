@@ -2,6 +2,9 @@ import "./App.css";
 // React Slick CSS
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+// react Toastify
+import "react-toastify/dist/ReactToastify.css";
+
 import { MainRouter } from "./routers/MainRouter";
 import { DataProvider } from "./context/context";
 import { AuthProvider } from "./context/AuthContext";

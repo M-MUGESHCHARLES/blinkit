@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, {
   createContext,
   useContext,
@@ -7,7 +6,9 @@ import React, {
   useEffect,
 } from "react";
 import { useAuthContext } from "./AuthContext";
-import { ProductsData, UpdateCart } from "../apis";
+import { ProductsData, UpdateCart, UserData } from "../apis";
+import { toast, Bounce } from "react-toastify";
+
 
 const DataContext = createContext();
 
@@ -33,6 +34,7 @@ export const DataProvider = ({ children }) => {
 
   const {userID} = useAuthContext();
 
+  // to fetch the Products data from the backend
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -91,18 +93,55 @@ export const DataProvider = ({ children }) => {
       try {
         const res = await UpdateCart(data);
         if (res?.status === 200 || 201) {
-          setCart(res.data.cart);
+          setCart(res.data.user.cart);
           // console.log(`Cart: ${JSON.stringify(res.data.cart, null, 2)}`);
+          toast.success( res.data.ResponseMessage , {
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
+          console.log('response message',JSON.stringify(res.data.ResponseMessage));
         }
       } catch (error) {
         console.error(
           "Error updating cart:",
           error.response?.data?.error || "An error occurred"
         );
+        toast.error(error.response?.data?.error ||  "An error occurred while updating the cart.", {
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
       }
     },
     [userID]
   );
+
+  // fetch the user data when app reloads manually
+    const fetchUserData = async (userID) => {
+      try {
+        const response = await UserData(userID);
+        if (response?.status === 200) {
+          const { user } = response.data;
+          setCart(user.cart || []);
+        }
+      } catch (error) {
+        console.error(
+          "Error fetching user data:",
+          error.response?.data?.error || error
+        );
+      }
+    };
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser?.UserID) {
+      fetchUserData(storedUser.UserID);
+    }
+  }, []);
+
+  // console.log("Cart : ", cart);
+
 
   const contextValue = {
     products,

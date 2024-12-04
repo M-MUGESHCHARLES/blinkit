@@ -11,30 +11,6 @@ export const AddCartButton = ({ ProductName, ProductID }) => {
   const { setCart, cart, handleCart } = useDataContext();
   const { userID } = useAuthContext();
 
-  // Memoized handleAddToCart function
-  // const handleAddToCart = useCallback( async (action) => {
-
-  //     const data = {
-  //       userID,
-  //       ProductID,
-  //       action,
-  //     };
-
-  //     try {
-  //       const res = await UpdateCart(data);
-  //       if(res?.status === 200 || 201 ) {
-  //         setCart(res.data.cart);
-  //         console.log(`Cart: ${JSON.stringify(res.data.cart, null, 2)}`);   
-  //         console.log('Cart data : ', cart);     
-  //       }
-  //     } catch (error) {
-  //       console.error(
-  //         "Error updating cart:",
-  //         error.response?.data?.error || "An error occurred"
-  //       );
-  //     }
-  //   }, [userID, ProductID] );
-
   // Handlers for Add, Increment, and Decrement
 
   const handleIncrement = () => {

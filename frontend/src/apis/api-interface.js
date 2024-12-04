@@ -26,3 +26,7 @@ export const ProductsDataApi = (path, data) => {
 export const SearchedProductsApi = (path) => {
     return axios.get(API_Base_Url + path);
 };
+
+export const GETUserDataApi = (path) => {
+    return axios.get(API_Base_Url + path);
+};

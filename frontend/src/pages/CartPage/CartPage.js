@@ -14,26 +14,28 @@ export default function CartPage() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    // Match cart data with ProductData (locally stored data)
+    // Match cart data with ProductData (fetched from database)
     const enrichedCartItems = cart.map((cartItem) => {
       const matchedProduct = products.find(
         (product) => product._id === cartItem.ProductID
       );
-      return matchedProduct
-        ? {
+      return matchedProduct 
+          ? {
             ...matchedProduct,
-            Count: cartItem.Count, // Include count from cart
-          }
-        : cartItem; // Fallback if no match found
+            Count: cartItem.Count, 
+          } : cartItem; 
     });
     setCartItems(enrichedCartItems);
-    // console.log('cart items : ' ,cartItems);
-    // console.log('cart : ',cart);
+    // console.log('cart 1 : ',cart);
+    // console.log('cart items 1 : ' ,cartItems);
   }, [cart,products]);
+
+    // console.log("cart 2 : ", cart);
+    // console.log("cart items 2 : ", cartItems);
 
   useEffect(() => {
     setCartButtonBadge(cartItems.length);
-  }, [cartItems]);
+  }, [cartItems,setCartButtonBadge]);
   
 
   const total = cartItems.reduce(
@@ -129,7 +131,7 @@ export default function CartPage() {
 
 
 // product item details component 
-const CartPageProductDetail = ({ item}) => {
+const CartPageProductDetail = ({item}) => {
   const [count, setCount] =useState(item.count);
   const {handleCart} = useDataContext();
 
