@@ -5,6 +5,7 @@ import { AddCartButton } from '../../components/AddCartButton/AddCartButton';
 import { ProductData } from '../../assets/Data/Data';
 import NotFoundPage from '../404/NotFoundPage';
 import ProductCardComponent from '../../components/ProductCardComponent/ProductCardComponent';
+import { NavBar } from '../../components/NavBar/NavBar';
 
 export default function ProductDetailsPage() {
     const {productID} = useParams();
@@ -43,6 +44,7 @@ export default function ProductDetailsPage() {
 
   return (
     <>
+      <NavBar/>
       <div className="container mt-5 mb-3">
         <div className="row">
           {/* Bread crumbs */}
@@ -131,7 +133,7 @@ export default function ProductDetailsPage() {
             <p className="text-muted small">{Details.description}</p>
 
             {/* Quantity Control */}
-            <AddCartButton ProductName={Details.name} ProductID={Details.id} />
+            <AddCartButton ProductID={Details._id} />
 
             {/* Why Shop Section */}
             <h3 className="h6 mt-4">Why shop from us?</h3>

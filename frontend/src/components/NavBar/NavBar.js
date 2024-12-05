@@ -14,6 +14,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 export const NavBar = () => {
   const [locationData, setLocationData] = useState(null);
   const [isFilterPage, setIsFilterPage] = useState(false);
+  // const [isHomePage, setIsHomePage] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -36,6 +37,7 @@ export const NavBar = () => {
     if (searchText === "") {
       setIsEditing(false);
       setIsFilterPage(false);
+      // setIsHomePage(true);
     }
   };
 
@@ -173,7 +175,7 @@ export const NavBar = () => {
           {isFilterPage ? (
             <div>
               <button
-                className="btn btn-outline-secondary"
+                className="btn btn-outline-secondary h-100"
                 onClick={handleBack}
               >
                 Back
@@ -188,23 +190,23 @@ export const NavBar = () => {
           )}
 
           {isFilterPage ? (
-            <div className="ps-lg-3 d-none d-md-block mx-auto">
+            <div className="d-none d-md-block mx-auto">
               <Badge
                 sx={{ fontWeight: "bold" }}
                 color="error"
                 badgeContent={cartButtonBadge}
               >
-                <CartButton/>
+                <CartButton />
               </Badge>
             </div>
           ) : (
-            <div className="ps-lg-3 mx-auto">
+            <div className="mx-auto">
               <Badge
                 sx={{ fontWeight: "bold" }}
                 color="error"
                 badgeContent={cartButtonBadge}
               >
-                <CartButton/>
+                <CartButton />
               </Badge>
             </div>
           )}

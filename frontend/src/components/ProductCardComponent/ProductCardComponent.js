@@ -11,13 +11,12 @@ import {ProductData} from '../../assets/Data/Data';
 
     const CardProduct = ProductData.find((P) => {
       return Data._id === P.id;
-    });  
-    
+    });      
      
    return (
      <>
          <section className='row m-0 p-0 border border-secondary-subtle shadow rounded-3 card h-100' id='ProductCard'>
-            <Link to={`/${Data.category}/${Number(Data._id)}`} className='p-0 m-0' onClick={() => handleViewedProduct(Data) } >
+            <Link to={`/${Data.category}/${Data.subCategory}/${Number(Data._id)}`} className='p-0 m-0' onClick={() => handleViewedProduct(Data) } >
               <div className='m-0 text-center'>
                   <img src={CardProduct.img} className='img-fluid rounded-5' alt='product' height='auto' width='100%' />
               </div>

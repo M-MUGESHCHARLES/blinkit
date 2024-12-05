@@ -133,7 +133,7 @@ export default function CartPage() {
 // product item details component 
 const CartPageProductDetail = ({item}) => {
   const [count, setCount] =useState(item.count);
-  const {handleCart} = useDataContext();
+  const { handleCart, loadingAddToCartButton } = useDataContext();
 
   const handleIncrement = () => {
     setCount((prevCount) => {
@@ -180,7 +180,7 @@ const CartPageProductDetail = ({item}) => {
       </div>
 
       <div className="d-flex flex-column gap-3 col-2">
-        <Button variant="contained" color="success" className="m-0 p-0 ms-auto">
+        <Button variant="contained" color="success" className="m-0 p-0 ms-auto" disabled={loadingAddToCartButton}>
           <div className="d-flex align-items-center w-100">
             <span
               style={{ cursor: "pointer", minWidth: "fit-content" }}

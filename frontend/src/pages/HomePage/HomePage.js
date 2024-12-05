@@ -9,6 +9,9 @@ import ProductCardComponent from "../../components/ProductCardComponent/ProductC
 import { useDataContext } from "../../context/context";
 import { BannerData, ProductsDisplay, ProductData } from "../../assets/Data/Data";
 import { Link } from "react-router-dom";
+import { LoaderCircle } from "../../components/Loader/LoaderCircle";
+import { Box } from "@mui/material";
+import { LoaderBounce } from "../../components/Loader/LoaderBounce";
 
 export const HomePage = () => {
 
@@ -31,6 +34,7 @@ export const HomePage = () => {
 
   // console.log("Recently Viewed:", recentlyViewed);
   // console.log("Filtered Products:", filteredProducts);
+  // console.log('Products : ', products.length);
 
   return (
     <>
@@ -84,13 +88,26 @@ export const HomePage = () => {
           </div>
 
           <div id="Products" className="row m-0 py-2">
-            {products
-              .filter((P) => P.category === "Dairy")
-              .map((P, index) => (
-                <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
-                  <ProductCardComponent Data={P} />
-                </div>
-              ))}
+            {products.length > 0 ? (
+              products
+                .filter((P) => P.category === "Dairy")
+                .map((P, index) => (
+                  <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
+                    <ProductCardComponent Data={P} />
+                  </div>
+                ))
+            ) : (
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                height="100%"
+                width="100%"
+                minHeight="250px"
+              >
+                <LoaderBounce />
+              </Box>
+            )}
           </div>
         </section>
 
@@ -106,13 +123,26 @@ export const HomePage = () => {
           </div>
 
           <div id="Products" className="row m-0 py-2">
-            {products
-              .filter((P) => P.category === "Snack")
-              .map((P, index) => (
-                <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
-                  <ProductCardComponent Data={P} />
-                </div>
-              ))}
+            {products.length > 0 ? (
+              products
+                .filter((P) => P.category === "Snack")
+                .map((P, index) => (
+                  <div className="col-6 col-md-4 col-lg-2 m-0 p-1" key={index}>
+                    <ProductCardComponent Data={P} />
+                  </div>
+                ))
+            ) : (
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                height="100%"
+                width="100%"
+                minHeight="250px"
+              >
+                <LoaderBounce />
+              </Box>
+            )}
           </div>
         </section>
 

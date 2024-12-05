@@ -57,7 +57,16 @@ export const MainRouter = () => {
           />
 
           <Route
-            path="/:category/:productID"
+            path="/:category/:subCategory"
+            element={
+              <PrivateRoute>
+                <CategoryPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/:category/:subCategory/:productID"
             element={
               <PrivateRoute>
                 <ProductDetailsPage />
@@ -82,8 +91,8 @@ export const MainRouter = () => {
       {/* Toast messager  */}
       <ToastContainer
         position="bottom-right"
-        autoClose={5000}
-        limit={3}
+        autoClose={1000}
+        limit={1}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -92,9 +101,8 @@ export const MainRouter = () => {
         draggable
         pauseOnHover
         theme="colored"
-        transition={Bounce} 
+        transition={Bounce}
       />
-
     </>
   );
 };

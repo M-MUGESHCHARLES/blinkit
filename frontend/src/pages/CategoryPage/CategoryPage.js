@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDataContext } from '../../context/context';
 import ProductCardComponent from '../../components/ProductCardComponent/ProductCardComponent';
 import { NavBar } from '../../components/NavBar/NavBar';
@@ -10,7 +10,8 @@ export const CategoryPage = () => {
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // below 600px
 
-    const {category} = useParams();
+    const {category, subCategory} = useParams();
+    const navigate = useNavigate();
     const {products} = useDataContext();
 
     // filter the products based on the category
@@ -20,17 +21,22 @@ export const CategoryPage = () => {
 
     // extract the subcategories from the filtered products and store it in array
     const subcategories = [
-      ...new Set(categoryProducts.map((product) => product["sub-category"])),
+      ...new Set(categoryProducts.map((product) => product.subCategory)),
     ];
     
     const [activeSubcategory, setActiveSubcategory] = useState(
-      subcategories[0]
+      subCategory || subcategories[0]
     );
 
     // filter the products based on the sub-category
     const filteredProducts = products.filter(
-      (product) => product["sub-category"] === activeSubcategory
+      (product) => product.subCategory === activeSubcategory
     );
+
+    const handleSubCategoryClick = (subCategory) => {
+      navigate(`/${category}/${subCategory}`);
+      setActiveSubcategory(subCategory);
+    };
     
   return (
     <>
@@ -43,19 +49,22 @@ export const CategoryPage = () => {
             className="col-3 border-end"
             sx={{ minHeight: "100vh", overflowY: "auto" }}
           >
-            
             <List>
               {subcategories.map((subcategory, index) => (
                 <ListItem
                   key={index}
                   button
-                  onClick={() => setActiveSubcategory(subcategory)}
+                  onClick={() => handleSubCategoryClick(subcategory)}
                   sx={{
-                    backgroundColor: activeSubcategory === subcategory ? "#eaf7e1" : "white",
-                    borderRight: activeSubcategory === subcategory ? "5px solid #4CAF50" : "none",
-                    cursor: "pointer", 
+                    backgroundColor:
+                      activeSubcategory === subcategory ? "#eaf7e1" : "white",
+                    borderRight:
+                      activeSubcategory === subcategory
+                        ? "5px solid #4CAF50"
+                        : "none",
+                    cursor: "pointer",
                     "&:hover": { backgroundColor: "#f5f5f5" },
-                    display:'flex',
+                    display: "flex",
                     flexDirection: isSmallScreen ? "column" : "row",
                   }}
                 >

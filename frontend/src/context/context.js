@@ -14,6 +14,9 @@ const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
 
+  // AddToCart Button disable, enable use state
+  const [loadingAddToCartButton, setLoadingAddToCartButton] = useState(false);
+
   // Navbar search box ---
   const [isEditing, setIsEditing] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -88,7 +91,9 @@ export const DataProvider = ({ children }) => {
         action,
       };
 
-      // console.log('product id : ', ProductID);      
+      setLoadingAddToCartButton(true);
+
+      // console.log('product id : ', Number(ProductID));      
 
       try {
         const res = await UpdateCart(data);
@@ -100,7 +105,7 @@ export const DataProvider = ({ children }) => {
             closeOnClick: true,
             pauseOnHover: true,
           });
-          console.log('response message',JSON.stringify(res.data.ResponseMessage));
+          // console.log('response message',JSON.stringify(res.data.ResponseMessage));
         }
       } catch (error) {
         console.error(
@@ -112,6 +117,8 @@ export const DataProvider = ({ children }) => {
           closeOnClick: true,
           pauseOnHover: true,
         });
+      } finally {
+        setLoadingAddToCartButton(false);
       }
     },
     [userID]
@@ -142,7 +149,6 @@ export const DataProvider = ({ children }) => {
 
   // console.log("Cart : ", cart);
 
-
   const contextValue = {
     products,
     setCart,
@@ -157,6 +163,7 @@ export const DataProvider = ({ children }) => {
     setIsEditing,
     searchText,
     setSearchText,
+    loadingAddToCartButton,
   };
 
   return (

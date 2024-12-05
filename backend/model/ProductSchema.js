@@ -11,6 +11,7 @@ const ProductSchema = new mongoose.Schema({
   description: String,
   brand: String,
   category: String,
+  subCategory: String,
 }, {
     collection: 'Products',
 });

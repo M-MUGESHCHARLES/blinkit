@@ -4,7 +4,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { NavBar } from '../../components/NavBar/NavBar';
 import ProductCardComponent from '../../components/ProductCardComponent/ProductCardComponent';
 import { SearchedProducts } from '../../apis';
-import { Loader } from '../../components/Loader/Loader';
+import { LoaderCircle } from '../../components/Loader/LoaderCircle';
 import { Box } from '@mui/material';
 
 export const FilterPage = () => {
@@ -54,10 +54,10 @@ export const FilterPage = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            height="100%" 
-            minHeight="200px" 
+            height="100%"
+            minHeight="100vh"
           >
-            <Loader />
+            <LoaderCircle />
           </Box>
         ) : (
           <div className="row m-0 p-0 pb-5 mb-2">

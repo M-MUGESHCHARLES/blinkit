@@ -1,15 +1,21 @@
 import { Button } from '@mui/material';
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDataContext } from '../../context/context';
-import axios from 'axios';
-import { useAuthContext } from '../../context/AuthContext';
-import { UpdateCart } from '../../apis';
 
-export const AddCartButton = ({ ProductName, ProductID }) => {
+export const AddCartButton = ({ ProductID }) => {
   const [count, setCount] = useState(0);
 
-  const { setCart, cart, handleCart } = useDataContext();
-  const { userID } = useAuthContext();
+  const { cart, handleCart, loadingAddToCartButton } = useDataContext();
+
+  useEffect(() => {
+    const productInCart = cart.find((item) => Number(item.ProductID) === Number(ProductID));
+    setCount(productInCart ? productInCart.Count : 0);
+    
+    console.log("productInCart", productInCart);
+    console.log("Cart", cart);
+    console.log("Product ID : ", ProductID, count);
+  
+  }, [ProductID]);
 
   // Handlers for Add, Increment, and Decrement
 
@@ -39,6 +45,7 @@ export const AddCartButton = ({ ProductName, ProductID }) => {
       variant={count > 0 ? "contained" : "outlined"}
       color="success"
       className="m-0 p-0 ms-auto"
+      disabled={loadingAddToCartButton}
     >
       {count === 0 ? (
         <span className="py-2 w-100" onClick={handleInitialAdd}>
