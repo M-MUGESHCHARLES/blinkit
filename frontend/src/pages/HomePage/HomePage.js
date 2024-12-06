@@ -1,4 +1,3 @@
-import "./Home.css";
 import banner_lg from "../../assets/banner-lg.jpg";
 import Slider from "react-slick";
 import { useContext, useEffect, useState } from "react";
@@ -9,7 +8,6 @@ import ProductCardComponent from "../../components/ProductCardComponent/ProductC
 import { useDataContext } from "../../context/context";
 import { BannerData, ProductsDisplay, ProductData } from "../../assets/Data/Data";
 import { Link } from "react-router-dom";
-import { LoaderCircle } from "../../components/Loader/LoaderCircle";
 import { Box } from "@mui/material";
 import { LoaderBounce } from "../../components/Loader/LoaderBounce";
 

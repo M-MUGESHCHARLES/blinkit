@@ -4,24 +4,27 @@ import { useDataContext } from '../../context/context';
 
 export const AddCartButton = ({ ProductID }) => {
   const [count, setCount] = useState(0);
+  // to manage AddToCart Button disable & enable while the request is made and waits for the response 
+  const [loading, setLoading] = useState(false);
 
-  const { cart, handleCart, loadingAddToCartButton } = useDataContext();
+  const { cart, handleCart } = useDataContext();
 
   useEffect(() => {
-    const productInCart = cart.find((item) => Number(item.ProductID) === Number(ProductID));
+    const productInCart = cart.find(
+      (item) => Number(item.ProductID) === Number(ProductID)
+    );
     setCount(productInCart ? productInCart.Count : 0);
-    
-    console.log("productInCart", productInCart);
-    console.log("Cart", cart);
-    console.log("Product ID : ", ProductID, count);
-  
+
+    // console.log("productInCart", productInCart);
+    // console.log("Cart", cart);
+    // console.log("Product ID : ", ProductID, count);
   }, [ProductID]);
 
   // Handlers for Add, Increment, and Decrement
 
   const handleIncrement = () => {
     setCount((prevCount) => {
-      handleCart(ProductID, "increment"); 
+      handleCart(ProductID, "increment", setLoading);
       return prevCount + 1;
     });
   };
@@ -29,7 +32,7 @@ export const AddCartButton = ({ ProductID }) => {
   const handleDecrement = () => {
     setCount((prevCount) => {
       if (prevCount > 0) {
-        handleCart(ProductID, "decrement"); 
+        handleCart(ProductID, "decrement", setLoading);
       }
       return prevCount > 0 ? prevCount - 1 : 0;
     });
@@ -37,7 +40,7 @@ export const AddCartButton = ({ ProductID }) => {
 
   const handleInitialAdd = () => {
     setCount(1);
-    handleCart(ProductID, "add");
+    handleCart(ProductID, "add", setLoading);
   };
 
   return (
@@ -45,7 +48,7 @@ export const AddCartButton = ({ ProductID }) => {
       variant={count > 0 ? "contained" : "outlined"}
       color="success"
       className="m-0 p-0 ms-auto"
-      disabled={loadingAddToCartButton}
+      disabled={loading}
     >
       {count === 0 ? (
         <span className="py-2 w-100" onClick={handleInitialAdd}>

@@ -14,9 +14,6 @@ const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
 
-  // AddToCart Button disable, enable use state
-  const [loadingAddToCartButton, setLoadingAddToCartButton] = useState(false);
-
   // Navbar search box ---
   const [isEditing, setIsEditing] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -84,14 +81,14 @@ export const DataProvider = ({ children }) => {
   };
 
   const handleCart = useCallback(
-    async (ProductID, action) => {
+    async (ProductID, action, setloading) => {
       const data = {
         userID,
         ProductID,
         action,
       };
 
-      setLoadingAddToCartButton(true);
+      setloading(true);
 
       // console.log('product id : ', Number(ProductID));      
 
@@ -118,7 +115,7 @@ export const DataProvider = ({ children }) => {
           pauseOnHover: true,
         });
       } finally {
-        setLoadingAddToCartButton(false);
+        setloading(false);
       }
     },
     [userID]
@@ -163,7 +160,6 @@ export const DataProvider = ({ children }) => {
     setIsEditing,
     searchText,
     setSearchText,
-    loadingAddToCartButton,
   };
 
   return (

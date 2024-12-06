@@ -113,7 +113,7 @@ router.put("/update-cart", async (req, res) => {
   }
 });
 
-// To get the stored products
+// search products 
 router.get("/products", async (req, res) => {
   const searchText = req.query.search || "";
   try {
@@ -146,5 +146,62 @@ router.get("/api/user/:userID", async (req, res) => {
   }
 });
 
+// to update wishlist
+router.put('/wishlist', async(req, res) => {
+  try {
+    const { userID, ProductID, action } = req.body;
+
+    if(!userID || !ProductID || !action) {
+      return res.status(400).send({ error: 'Invalid request data'});
+    }
+
+    const user = await UserSchema.findById(userID);
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+
+    const product = await ProductSchema.findById(ProductID);
+    if (!product) {
+      return res.status(404).send({ error: "Product not found" });
+    }
+
+    let ResponseMessage = '';
+
+    const isProductInWishlist = user.wishlist.some(
+      (item) => item._id.toString() === product._id.toString()
+    );
+
+    if(action === "add") {
+
+      if(!isProductInWishlist) {
+        user.wishlist.push(product);
+        ResponseMessage = 'Product added to wishlist';
+      } else {
+        ResponseMessage = "Product already in wishlist.";
+      }
+      
+    } else if ( action === 'remove') {
+
+      if (isProductInWishlist) {
+        user.wishlist = user.wishlist.filter(
+          (item) => item._id.toString() !== ProductID.toString()
+        );
+        ResponseMessage = 'Product removed from wishlist';
+      } else {
+        ResponseMessage = "Product not in wishlist.";
+      }
+
+    } else {
+      return res.status(400).send({ error: 'Invalid action' });
+    }
+
+    await user.save();
+    res.status(200).send({ message: ResponseMessage });
+    
+  } catch (error) {
+    console.error("Error updating wishlist :", error);
+    res.status(500).send({ error: "Failed to update wishlist" });
+  }
+});
 
 module.exports = router;

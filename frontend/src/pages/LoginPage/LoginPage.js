@@ -1,6 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
 import React from 'react'
-import './LoginPage.css'
 import { useForm } from 'react-hook-form';
 import { useAuthContext } from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';

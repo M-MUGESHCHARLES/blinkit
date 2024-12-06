@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './CartPage.css';
 import { Button, IconButton } from '@mui/material';
 import { MdDelete } from 'react-icons/md';
 import { useDataContext } from '../../context/context';
@@ -132,32 +131,33 @@ export default function CartPage() {
 
 // product item details component 
 const CartPageProductDetail = ({item}) => {
-  const [count, setCount] =useState(item.count);
-  const { handleCart, loadingAddToCartButton } = useDataContext();
+  const [count, setCount] = useState(item.count);
+  // to manage AddToCart Button disable & enable while the request is made and waits for the response
+  const [loading, setLoading] = useState(false);
+
+  const { handleCart } = useDataContext();
 
   const handleIncrement = () => {
     setCount((prevCount) => {
-      handleCart(item._id, "increment");
+      handleCart(item._id, "increment", setLoading);
       return prevCount + 1;
     });
   };
 
   const handleDecrement = () => {
     setCount((prevCount) => {
-        handleCart(item._id, "decrement");
+      handleCart(item._id, "decrement", setLoading);
       return prevCount > 0 ? prevCount - 1 : 0;
     });
   };
 
   const handleRemove = () => {
-    handleCart(item._id, 'remove');
+    handleCart(item._id, "remove", setLoading);
   };
 
-      const CartProduct = ProductData.find((P) => {
-        return item._id === P.id;
-      });  
-
-
+  const CartProduct = ProductData.find((P) => {
+    return item._id === P.id;
+  });
 
   return (
     <div className="item-details d-flex align-items-center border border-end-0 border-top-0 pe-1 py-1 rounded-4 mt-3 shadow-sm">
@@ -180,7 +180,12 @@ const CartPageProductDetail = ({item}) => {
       </div>
 
       <div className="d-flex flex-column gap-3 col-2">
-        <Button variant="contained" color="success" className="m-0 p-0 ms-auto" disabled={loadingAddToCartButton}>
+        <Button
+          variant="contained"
+          color="success"
+          className="m-0 p-0 ms-auto"
+          disabled={loading}
+        >
           <div className="d-flex align-items-center w-100">
             <span
               style={{ cursor: "pointer", minWidth: "fit-content" }}
@@ -201,10 +206,7 @@ const CartPageProductDetail = ({item}) => {
         </Button>
 
         <div className="text-center">
-          <IconButton
-            className="text-danger mx-auto"
-            onClick={handleRemove}
-          >
+          <IconButton className="text-danger mx-auto" onClick={handleRemove}>
             <MdDelete />
           </IconButton>
         </div>

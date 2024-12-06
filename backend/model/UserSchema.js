@@ -16,6 +16,17 @@ const CartItemSchema = new mongoose.Schema(
   { _id: false } // This removes the creation of an additional _id field for each cart item
 );
 
+// Wishlist schema
+const WishlistSchema = new mongoose.Schema(
+  {
+    _id: Number,
+    name: String,
+    img: String,
+    price: Number,
+    brand: String,
+  }
+);
+
 // User schema
 const UserSchema = new mongoose.Schema(
     {
@@ -35,12 +46,15 @@ const UserSchema = new mongoose.Schema(
             type: [CartItemSchema],
             default: []
         },
+        wishlist:{
+          type:[WishlistSchema],
+          default: []
+        },
     },
-    {
-        collection: 'User',
-    }
+    { timestamps: true },
+    { collection: 'Users',}
 );
 
-const User = mongoose.model('User',UserSchema,);
+const User = mongoose.model('Users',UserSchema,);
 
 module.exports = User;

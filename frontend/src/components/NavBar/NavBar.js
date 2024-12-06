@@ -1,7 +1,6 @@
 import { Badge, Box, IconButton } from "@mui/material";
 import "./NavBar.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { IoSearch } from "react-icons/io5";
 import Slider from "react-slick";
 import { CartButton } from "../CartButton/CartButton";
@@ -9,7 +8,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import { GetUserLocation } from "../../apis";
 import { CgProfile } from "react-icons/cg";
 import { useDataContext } from "../../context/context";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
   const [locationData, setLocationData] = useState(null);

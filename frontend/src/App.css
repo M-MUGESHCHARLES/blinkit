@@ -6,3 +6,128 @@
 #color-G {
     color: #54B226;
 }
+
+#Home_Page {
+        padding-right: 5px;
+        padding-left: 5px;
+}
+
+@media screen and (width > 1025px) {
+    #Home_Page {
+        padding-right: 5rem;
+        padding-left: 5rem;
+    }    
+}
+
+/* =================================================== HomePage.js ===================================================== */
+
+/* ------------------- Banner Slider ---*/
+
+ul.slick-dots {
+display: block;
+    position: absolute;
+    bottom: 10px;
+}
+
+.custom-dot {
+  font-size: 15px;
+  font-weight: bold;
+  opacity: 0.7;
+}
+
+@media screen and (width < 754px) {
+    .custom-dot {
+        font-size: 6px;
+    }    
+    ul.slick-dots {
+        bottom: 5px;
+    }
+}
+
+.slick-dots li.slick-active .custom-dot {
+  font-weight: bold;
+  opacity: 1;
+}
+
+span.fraction-dot {
+    border-radius: 15px;
+    padding: 2px 4px;
+    background-color:#606470;
+    color:#F6F6F6;
+}
+
+.custom-dot span.regular-dot {
+    color: #45474B;
+}
+
+div.slick-slide.slick-active div div {
+    outline: none;
+}
+
+/* ------------------------ Product Display --- */
+
+.parent_div_productDisplay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0; 
+}
+
+.child_div_productDisplay {
+  flex: 0 0 16.6667% !important; 
+}
+
+@media (min-width: 768px) {
+  .child_div_productDisplay {
+    flex: 0 0 12.5% !important;
+  }
+}
+
+/* Large screens: 10 columns */
+@media (width > 1020px) {
+  .child_div_productDisplay {
+    flex: 0 0 10% !important; 
+  }
+}
+
+
+/* =============================================================== signup page.js ===================================== */
+
+#SignUp-Form {
+    max-width: 470px;
+}
+
+/* =============================================================== login Page.js ===================================== */
+
+#Login-Form {
+    max-width: 470px;
+}
+
+/* =============================================================== Cart Page.js ===================================== */
+
+div.cart-container { 
+    /* padding: 20px;  */
+    max-width: 400px; 
+    /* border-color: #f8f8f8;  */
+    /* border-radius: 8px;  */
+}
+
+div.cart-container div.delivery-info {
+ background: #f0f0ff; 
+ /* padding: 15px;  */
+ /* border-radius: 8px;  */
+ /* margin-top: 15px;    */
+} 
+
+div.cart-container div.bill-details {
+    background-color: #f0f0ff;
+}
+
+div.cart-container div.cancellation-policy {
+    font-size: 12px;
+}
+
+/* =============================================================== 404 Page.js ===================================== */
+
+span#NotFoundIcon svg {
+    margin-bottom: 1rem;
+}

@@ -1,5 +1,4 @@
 import React from "react";
-import './NotFoundPage.css';
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaExclamationCircle } from "react-icons/fa";
