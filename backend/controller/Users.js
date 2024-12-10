@@ -147,7 +147,7 @@ router.get("/api/user/:userID", async (req, res) => {
 });
 
 // to update wishlist
-router.put('/wishlist', async(req, res) => {
+router.put('/api/wishlist', async(req, res) => {
   try {
     const { userID, ProductID, action } = req.body;
 
@@ -196,12 +196,13 @@ router.put('/wishlist', async(req, res) => {
     }
 
     await user.save();
-    res.status(200).send({ message: ResponseMessage });
+    res.status(200).send({ user, ResponseMessage });
     
   } catch (error) {
     console.error("Error updating wishlist :", error);
     res.status(500).send({ error: "Failed to update wishlist" });
   }
 });
+
 
 module.exports = router;

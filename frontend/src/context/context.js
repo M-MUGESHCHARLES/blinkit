@@ -6,8 +6,8 @@ import React, {
   useEffect,
 } from "react";
 import { useAuthContext } from "./AuthContext";
-import { ProductsData, UpdateCart, UserData } from "../apis";
-import { toast, Bounce } from "react-toastify";
+import { ProductsData, UpdateCart, UpdateWishList, UserData } from "../apis";
+import { toast } from "react-toastify";
 
 
 const DataContext = createContext();
@@ -31,6 +31,9 @@ export const DataProvider = ({ children }) => {
         : "[]"
     )
   );
+
+  // wishlist
+  const [wishList, setWishList] = useState([]);
 
   const {userID} = useAuthContext();
 
@@ -80,6 +83,7 @@ export const DataProvider = ({ children }) => {
     // console.log(`Viewed products : ${JSON.stringify(viewedProduct)}`);
   };
 
+  // handle cart button function
   const handleCart = useCallback(
     async (ProductID, action, setloading) => {
       const data = {
@@ -96,7 +100,7 @@ export const DataProvider = ({ children }) => {
         const res = await UpdateCart(data);
         if (res?.status === 200 || 201) {
           setCart(res.data.user.cart);
-          // console.log(`Cart: ${JSON.stringify(res.data.cart, null, 2)}`);
+          // console.log(`Cart: ${JSON.stringify(res.data.user.cart, null, 2)}`);
           toast.success( res.data.ResponseMessage , {
             hideProgressBar: false,
             closeOnClick: true,
@@ -128,6 +132,7 @@ export const DataProvider = ({ children }) => {
         if (response?.status === 200) {
           const { user } = response.data;
           setCart(user.cart || []);
+          setWishList(user.wishlist || []);
         }
       } catch (error) {
         console.error(
@@ -136,15 +141,56 @@ export const DataProvider = ({ children }) => {
         );
       }
     };
+    useEffect(() => {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      if (storedUser?.UserID) {
+        fetchUserData(storedUser.UserID);
+      }
+    }, []);
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser?.UserID) {
-      fetchUserData(storedUser.UserID);
+  // handle wishlist function  
+  const handleWishList = async(ProductID, action, setLoadingWishListButton) => {
+    const data = {
+      userID,
+      ProductID,
+      action
+    };
+
+    setLoadingWishListButton(true);
+
+    // console.log('PayLoad Data : ', data);  
+
+    try {
+      const res = await UpdateWishList(data);
+      if (res.status >= 200 && res.status < 300) {
+        setWishList(res.data.user.wishlist);
+        // console.log(`Wish List: ${JSON.stringify(res.data.user.wishlist, null, 2)}`);
+        toast.success(res.data.ResponseMessage, {
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+        console.log(
+          "response message : ",
+          JSON.stringify(res.data.ResponseMessage)
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Error updating wishlist:",error );
+      toast.error(
+        error.response?.data?.error ||
+          "error adding product to the wishlist.",
+        {
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        }
+      );
+    } finally {
+      setLoadingWishListButton(false);
     }
-  }, []);
-
-  // console.log("Cart : ", cart);
+  };
 
   const contextValue = {
     products,
@@ -160,6 +206,8 @@ export const DataProvider = ({ children }) => {
     setIsEditing,
     searchText,
     setSearchText,
+    wishList,
+    handleWishList,
   };
 
   return (

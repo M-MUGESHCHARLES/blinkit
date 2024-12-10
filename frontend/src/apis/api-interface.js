@@ -30,3 +30,7 @@ export const SearchedProductsApi = (path) => {
 export const GETUserDataApi = (path) => {
     return axios.get(API_Base_Url + path);
 };
+
+export const UpdateWishListApi = (path, data) => {
+    return axios.put(API_Base_Url + path, data );
+};

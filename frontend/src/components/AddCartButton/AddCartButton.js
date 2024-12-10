@@ -47,7 +47,7 @@ export const AddCartButton = ({ ProductID }) => {
     <Button
       variant={count > 0 ? "contained" : "outlined"}
       color="success"
-      className="m-0 p-0 ms-auto"
+      className="m-0 p-0"
       disabled={loading}
     >
       {count === 0 ? (

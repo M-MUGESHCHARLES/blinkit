@@ -1,4 +1,4 @@
-import { GETLocationApi, GETUserDataApi, POSTUserLoginApi, POSTUserSignUpApi, ProductsDataApi, SearchedProductsApi, UpdateCartApi } from "./api-interface";
+import { GETLocationApi, GETUserDataApi, POSTUserLoginApi, POSTUserSignUpApi, ProductsDataApi, SearchedProductsApi, UpdateCartApi, UpdateWishListApi } from "./api-interface";
 
 const NetworkLocationApiPath = `http://ip-api.com/json/`;
 
@@ -28,4 +28,8 @@ export const SearchedProducts = (query) => {
 
 export const UserData = (UserID) => {
     return GETUserDataApi(`/api/user/${UserID}`);
+};
+
+export const UpdateWishList = (data) => {
+    return UpdateWishListApi(`/api/wishlist`, data);
 };

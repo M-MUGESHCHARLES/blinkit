@@ -12,6 +12,7 @@ import { SignUpPage } from "../pages/SignUpPage/SignUpPage";
 import { FilterPage } from "../pages/FilterPage/FilterPage";
 import { CategoryPage } from "../pages/CategoryPage/CategoryPage";
 import { ToastContainer, Bounce } from "react-toastify";
+import {WishListPage} from '../pages/WishListPage/WishListPage';
 
 export const MainRouter = () => {
   return (
@@ -79,6 +80,15 @@ export const MainRouter = () => {
             element={
               <PrivateRoute>
                 <FilterPage />
+              </PrivateRoute>
+            }
+          />
+          
+          <Route
+            path="/mywishlist"
+            element={
+              <PrivateRoute>
+                <WishListPage />
               </PrivateRoute>
             }
           />
