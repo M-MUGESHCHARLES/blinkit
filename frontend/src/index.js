@@ -8,9 +8,8 @@ import { WishListPage } from './pages/WishListPage/WishListPage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
         <>
-             <App />   
-             {/* <Rough/> */}
-             {/* <WishListPage/> */}
+             {/* <App />    */}
+             <Rough/>
         </>   
 );
 

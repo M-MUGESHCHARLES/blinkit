@@ -34,16 +34,19 @@ export default function ProductDetailsPage() {
         (P) => productDetails?._id === P.id
       );
 
-      const productWishListed = wishList.some((P) => P._id === Number(productID));
-
       setDetails(productDetails || null);
       setDetailsProduct(productImageDetails || null);
       setIsPageLoading(false);
-      if (productWishListed) {
-        setIsWishListed(true);
-      }
+      
     }
   }, [products, productID]);
+
+    useEffect(() => {
+        const productWishListed = wishList.some((P) => P._id === Details._id || P._id === productID );
+        if (productWishListed) {
+          setIsWishListed(true);
+        }
+    },[Details, productID]);
 
   if (!Details) {
     return <NotFoundPage />; // Redirect to 404 Page

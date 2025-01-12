@@ -2,7 +2,6 @@ import { Badge, Box, Button, Paper, Table, TableBody, TableCell, TableContainer,
 import React, { useState } from 'react'
 import { ProductData } from '../../assets/Data/Data';
 import { MdDelete } from 'react-icons/md';
-import image from '../../assets/Product-sample/Product-1.jpg'
 import { useDataContext } from '../../context/context';
 import { Link } from 'react-router-dom';
 import PNG from '../../assets/Png/your wishlist is empty.jpg'

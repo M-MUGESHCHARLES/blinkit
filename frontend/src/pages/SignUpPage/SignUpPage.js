@@ -1,7 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useAuthContext } from "../../context/AuthContext";
 import { Link, useNavigate} from 'react-router-dom';
 import { UserSignUp } from '../../apis';
 
@@ -53,10 +52,10 @@ export const SignUpPage = () => {
                 type="text"
                 placeholder="Name"
                 {...register("Name", {
-                  // required: {
-                  //   value: true,
-                  //   message: "* Enter your name",
-                  // },
+                  required: {
+                    value: true,
+                    message: "* Enter your name",
+                  },
                 })}
                 className="w-100 px-2 py-2 rounded-2 border border-1"
               />
@@ -77,14 +76,14 @@ export const SignUpPage = () => {
                 type="Email"
                 placeholder="Email"
                 {...register("Email", {
-                  // required: {
-                  //   value: true,
-                  //   message: "* Enter your E-mail ",
-                  // },
-                  // pattern: {
-                  //   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
-                  //   message: "* Invalid email format ",
-                  // },
+                  required: {
+                    value: true,
+                    message: "* Enter your E-mail ",
+                  },
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+                    message: "* Invalid email format ",
+                  },
                 })}
                 className="w-100 px-2 py-2 rounded-2 border border-1"
               />
@@ -105,10 +104,10 @@ export const SignUpPage = () => {
                 type="password"
                 placeholder="Password"
                 {...register("Password", {
-                  // required: {
-                  //   value: true,
-                  //   message: "* Password is required ",
-                  // },
+                  required: {
+                    value: true,
+                    message: "* Password is required ",
+                  },
                 })}
                 className="w-100 px-2 py-2 rounded-2 border border-1"
               />
